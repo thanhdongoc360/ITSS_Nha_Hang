@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
   res.json({
     success: true,
-    message: 'GohanGo API Server is running! 骨',
+    message: 'GohanGo API Server is running! 骨',
     version: '1.0.0',
     endpoints: {
       auth: '/api/auth',
@@ -31,7 +31,8 @@ app.get('/', (req, res) => {
       favorites: '/api/favorites',
       history: '/api/history',
       profile: '/api/profile',
-      recommendations: '/api/recommendations'
+      recommendations: '/api/recommendations',
+      reviews: '/api/reviews'
     }
   });
 });
@@ -43,6 +44,7 @@ app.use('/api/favorites', require('./routes/favorites'));
 app.use('/api/history', require('./routes/history'));
 app.use('/api/profile', require('./routes/profile'));
 app.use('/api/recommendations', require('./routes/recommendations'));
+app.use('/api/reviews', require('./routes/reviews'));
 
 // 404 Handler
 app.use((req, res) => {
