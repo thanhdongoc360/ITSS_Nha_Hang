@@ -3,6 +3,22 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { restaurantAPI, favoriteAPI, historyAPI, reviewAPI } from '../services/api';
 import { useAuth } from '../contexts/AuthContext';
 import { toast } from 'react-toastify';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+
+// Fix for default marker icon in webpack
+import icon from 'leaflet/dist/images/marker-icon.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+
+let DefaultIcon = L.icon({
+  iconUrl: icon,
+  shadowUrl: iconShadow,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41]
+});
+
+L.Marker.prototype.options.icon = DefaultIcon;
 
 const RestaurantDetailPage = () => {
   const { id } = useParams();
@@ -260,18 +276,33 @@ const RestaurantDetailPage = () => {
         </div>
       </div>
 
-      {/* Map Section (Placeholder) */}
+      {/* Map Section */}
       {restaurant.latitude && restaurant.longitude && (
         <div className="mt-5">
           <h3>Location</h3>
           <div className="card">
-            <div className="card-body text-center bg-light" style={{ height: '300px' }}>
-              <i className="bi bi-map fs-1 text-muted"></i>
-              <p className="text-muted mt-3">
-                Map integration would go here<br/>
-                Coordinates: {restaurant.latitude}, {restaurant.longitude}
-              </p>
+            <div className="card-body p-0" style={{ height: '400px' }}>
+              <MapContainer
+                center={[parseFloat(restaurant.latitude), parseFloat(restaurant.longitude)]}
+                zoom={16}
+                style={{ height: '100%', width: '100%' }}
+              >
+                <TileLayer
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                <Marker position={[parseFloat(restaurant.latitude), parseFloat(restaurant.longitude)]}>
+                  <Popup>
+                    <strong>{restaurant.name}</strong><br />
+                    {restaurant.address}
+                  </Popup>
+                </Marker>
+              </MapContainer>
             </div>
+          </div>
+          <div className="mt-2 text-muted small">
+            <i className="bi bi-geo-alt me-1"></i>
+            {restaurant.address}
           </div>
         </div>
       )}
