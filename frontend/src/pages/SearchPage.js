@@ -156,7 +156,7 @@ const SearchPage = () => {
             <div className="d-flex justify-content-between align-items-center mb-3">
               <h5 className="mb-0">
                 <i className="bi bi-funnel me-2"></i>
-                Filters
+                フィルター
               </h5>
               {getActiveFiltersCount() > 0 && (
                 <span className="badge bg-primary rounded-pill">
@@ -167,11 +167,11 @@ const SearchPage = () => {
 
             {/* Search Input */}
             <div className="mb-4">
-              <label className="form-label fw-semibold">Search</label>
+              <label className="form-label fw-semibold">検索</label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="Restaurant name..."
+                placeholder="レストラン名..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
               />
@@ -179,7 +179,7 @@ const SearchPage = () => {
 
             {/* Cuisine Filter */}
             <div className="mb-4">
-              <label className="form-label fw-semibold">Cuisine Type</label>
+              <label className="form-label fw-semibold">料理タイプ</label>
               <div className="cuisine-filters">
                 {cuisines.map(cuisine => (
                   <div key={cuisine} className="form-check mb-2">
@@ -200,7 +200,7 @@ const SearchPage = () => {
 
             {/* Price Filter */}
             <div className="mb-4">
-              <label className="form-label fw-semibold">Price Range</label>
+              <label className="form-label fw-semibold">価格帯</label>
               <div className="price-filters">
                 {[1, 2, 3].map(price => (
                   <div key={price} className="form-check mb-2">
@@ -212,7 +212,7 @@ const SearchPage = () => {
                       onChange={() => togglePrice(price)}
                     />
                     <label className="form-check-label" htmlFor={`price-${price}`}>
-                      {getPriceLabel(price)} {price === 1 ? '(Budget)' : price === 2 ? '(Moderate)' : '(Expensive)'}
+                      {getPriceLabel(price)} {price === 1 ? '(安い)' : price === 2 ? '(普通)' : '(高い)'}
                     </label>
                   </div>
                 ))}
@@ -222,7 +222,7 @@ const SearchPage = () => {
             {/* Distance Filter */}
             <div className="mb-4">
               <label className="form-label fw-semibold">
-                Max Distance: {maxDistance}m
+                最大距離: {maxDistance}m
               </label>
               <input
                 type="range"
@@ -242,7 +242,7 @@ const SearchPage = () => {
             {/* Rating Filter */}
             <div className="mb-4">
               <label className="form-label fw-semibold">
-                Minimum Rating: {minRating > 0 ? `${minRating}★` : 'Any'}
+                最低評価: {minRating > 0 ? `${minRating}★` : 'すべて'}
               </label>
               <input
                 type="range"
@@ -254,7 +254,7 @@ const SearchPage = () => {
                 onChange={(e) => setMinRating(parseFloat(e.target.value))}
               />
               <div className="d-flex justify-content-between small text-muted">
-                <span>Any</span>
+                <span>すべて</span>
                 <span>5★</span>
               </div>
             </div>
@@ -266,7 +266,7 @@ const SearchPage = () => {
                 onClick={handleReset}
               >
                 <i className="bi bi-arrow-clockwise me-2"></i>
-                Clear All Filters
+                すべてのフィルターをクリア
               </button>
             )}
           </div>
@@ -279,10 +279,10 @@ const SearchPage = () => {
             <div>
               <h1 className="h3 mb-1">
                 <i className="bi bi-search me-2"></i>
-                Search Restaurants
+                レストラン検索
               </h1>
               <p className="text-muted mb-0">
-                {loading ? 'Loading...' : `${filteredRestaurants.length} restaurants found`}
+                {loading ? '読み込み中...' : `${filteredRestaurants.length}件のレストランが見つかりました`}
               </p>
             </div>
 
@@ -292,7 +292,7 @@ const SearchPage = () => {
               onClick={() => setShowFilters(!showFilters)}
             >
               <i className="bi bi-funnel me-2"></i>
-              Filters {getActiveFiltersCount() > 0 && `(${getActiveFiltersCount()})`}
+              フィルター {getActiveFiltersCount() > 0 && `(${getActiveFiltersCount()})`}
             </button>
           </div>
 
@@ -327,7 +327,7 @@ const SearchPage = () => {
             <div className="card-body py-2">
               <div className="row align-items-center g-2">
                 <div className="col-auto">
-                  <span className="text-muted small">Sort by:</span>
+                  <span className="text-muted small">並び替え:</span>
                 </div>
                 <div className="col-auto">
                   <select
@@ -335,10 +335,10 @@ const SearchPage = () => {
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
                   >
-                    <option value="rating">Rating</option>
-                    <option value="distance">Distance</option>
-                    <option value="price">Price</option>
-                    <option value="reviews">Reviews</option>
+                    <option value="rating">評価</option>
+                    <option value="distance">距離</option>
+                    <option value="price">価格</option>
+                    <option value="reviews">レビュー数</option>
                   </select>
                 </div>
                 <div className="col-auto">
@@ -359,7 +359,7 @@ const SearchPage = () => {
               <div className="spinner-border text-primary" role="status">
                 <span className="visually-hidden">Loading...</span>
               </div>
-              <p className="mt-3 text-muted">Loading restaurants...</p>
+              <p className="mt-3 text-muted">レストランを読み込み中...</p>
             </div>
           ) : filteredRestaurants.length > 0 ? (
             <div className="row">
@@ -374,12 +374,12 @@ const SearchPage = () => {
           ) : (
             <div className="text-center py-5">
               <i className="bi bi-search display-1 text-muted"></i>
-              <h3 className="mt-3">No Restaurants Found</h3>
+              <h3 className="mt-3">レストランが見つかりません</h3>
               <p className="text-muted">
-                Try adjusting your filters or search terms
+                フィルターまたは検索語を調整してください
               </p>
               <button className="btn btn-primary" onClick={handleReset}>
-                Clear All Filters
+                すべてのフィルターをクリア
               </button>
             </div>
           )}

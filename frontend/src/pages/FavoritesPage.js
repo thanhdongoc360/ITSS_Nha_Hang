@@ -19,7 +19,7 @@ const FavoritesPage = () => {
       const response = await favoriteAPI.getAll();
       setFavorites(response.data.favorites || []);
     } catch (err) {
-      setError('Failed to load favorites');
+      setError('お気に入りの読み込みに失敗しました');
       console.error(err);
     } finally {
       setLoading(false);
@@ -47,7 +47,7 @@ const FavoritesPage = () => {
     <div className="container py-4">
       <h1 className="mb-4">
         <i className="bi bi-heart-fill text-danger me-2"></i>
-        My Favorites
+        私のお気に入り
       </h1>
 
       {error && (
@@ -57,7 +57,7 @@ const FavoritesPage = () => {
       {favorites.length > 0 ? (
         <>
           <p className="text-muted mb-4">
-            You have {favorites.length} favorite restaurant{favorites.length !== 1 ? 's' : ''}
+            {favorites.length}件のお気に入りレストランがあります
           </p>
           <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             {favorites.map((restaurant) => (
@@ -73,12 +73,12 @@ const FavoritesPage = () => {
       ) : (
         <div className="text-center py-5">
           <i className="bi bi-heart display-1 text-muted"></i>
-          <h3 className="mt-3">No favorites yet</h3>
+          <h3 className="mt-3">お気に入りはまだありません</h3>
           <p className="text-muted">
-            Start exploring restaurants and add them to your favorites!
+            レストランを探してお気に入りに追加しましょう！
           </p>
           <a href="/" className="btn btn-primary mt-3">
-            Browse Restaurants
+            レストランを閲覧
           </a>
         </div>
       )}

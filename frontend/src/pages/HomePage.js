@@ -28,7 +28,7 @@ const HomePage = () => {
       setPopular(popRes.data.restaurants || []);
       setNearby(nearRes.data.restaurants || []);
     } catch (err) {
-      setError('Failed to load restaurants');
+      setError('レストランの読み込みに失敗しました');
       console.error(err);
     } finally {
       setLoading(false);
@@ -40,7 +40,7 @@ const HomePage = () => {
       <div className="container py-5">
         <div className="text-center">
           <div className="spinner-border text-primary" role="status">
-            <span className="visually-hidden">Loading...</span>
+            <span className="visually-hidden">読み込み中...</span>
           </div>
         </div>
       </div>
@@ -59,8 +59,8 @@ const HomePage = () => {
     <div className="container py-4">
       {/* Hero Section */}
       <div className="text-center mb-5">
-        <h1 className="display-4 fw-bold mb-3">Find Your Next Meal 🍜</h1>
-        <p className="lead text-muted">Discover the best restaurants around you</p>
+        <h1 className="display-4 fw-bold mb-3">次の食事を見つけよう 🍜</h1>
+        <p className="lead text-muted">周辺の最高のレストランを発見しよう</p>
       </div>
 
       {/* Popular Restaurants */}
@@ -69,7 +69,7 @@ const HomePage = () => {
           <div className="d-flex justify-content-between align-items-center mb-3">
             <h2 className="h4 mb-0">
               <i className="bi bi-fire text-danger me-2"></i>
-              Popular Restaurants
+              人気のレストラン
             </h2>
           </div>
           <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
@@ -90,7 +90,7 @@ const HomePage = () => {
           <div className="d-flex justify-content-between align-items-center mb-3">
             <h2 className="h4 mb-0">
               <i className="bi bi-geo-alt text-primary me-2"></i>
-              Nearby Restaurants
+              近くのレストラン
             </h2>
           </div>
           <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
@@ -110,7 +110,7 @@ const HomePage = () => {
         <div className="d-flex justify-content-between align-items-center mb-3">
           <h2 className="h4 mb-0">
             <i className="bi bi-grid text-success me-2"></i>
-            All Restaurants
+            すべてのレストラン
           </h2>
         </div>
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">

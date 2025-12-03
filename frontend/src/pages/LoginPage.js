@@ -22,7 +22,7 @@ const LoginPage = () => {
     if (result.success) {
       navigate('/');
     } else {
-      setError(result.message || 'Invalid email or password');
+      setError(result.message || 'メールまたはパスワードが無効です');
     }
   };
 
@@ -34,7 +34,7 @@ const LoginPage = () => {
             <div className="card-body p-5">
               <div className="text-center mb-4">
                 <h2 className="fw-bold">🍜 GohanGo</h2>
-                <p className="text-muted">Login to your account</p>
+                <p className="text-muted">アカウントにログイン</p>
               </div>
 
               {error && (
@@ -45,7 +45,7 @@ const LoginPage = () => {
 
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                  <label htmlFor="email" className="form-label">Email</label>
+                  <label htmlFor="email" className="form-label">メールアドレス</label>
                   <input
                     type="email"
                     className="form-control"
@@ -58,7 +58,7 @@ const LoginPage = () => {
                 </div>
 
                 <div className="mb-3">
-                  <label htmlFor="password" className="form-label">Password</label>
+                  <label htmlFor="password" className="form-label">パスワード</label>
                   <input
                     type="password"
                     className="form-control"
@@ -66,7 +66,7 @@ const LoginPage = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    placeholder="Enter password"
+                    placeholder="パスワードを入力"
                   />
                 </div>
 
@@ -78,17 +78,17 @@ const LoginPage = () => {
                   {loading ? (
                     <>
                       <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                      Logging in...
+                      ログイン中...
                     </>
                   ) : (
-                    'Login'
+                    'ログイン'
                   )}
                 </button>
               </form>
 
               <div className="text-center">
                 <p className="mb-0">
-                  Don't have an account? <Link to="/register">Register</Link>
+                  アカウントがありませんか？ <Link to="/register">登録</Link>
                 </p>
               </div>
             </div>

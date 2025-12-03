@@ -49,7 +49,7 @@ const RestaurantDetailPage = () => {
       // Add to history
       await historyAPI.add(id, 'view');
     } catch (err) {
-      setError('Failed to load restaurant details');
+      setError('レストラン情報の読み込みに失敗しました');
       console.error(err);
     } finally {
       setLoading(false);
@@ -98,7 +98,7 @@ const RestaurantDetailPage = () => {
   const handleReviewSubmit = async (e) => {
     e.preventDefault();
     if (!user) {
-      toast.error('Vui lòng đăng nhập để đánh giá');
+      toast.error('レビューを書くにはログインしてください');
       navigate('/login');
       return;
     }
@@ -106,13 +106,13 @@ const RestaurantDetailPage = () => {
     setSubmitingReview(true);
     try {
       await reviewAPI.createOrUpdate(id, reviewFormData.rating, reviewFormData.comment);
-      toast.success(myReview ? 'Cập nhật đánh giá thành công!' : 'Đánh giá thành công!');
+      toast.success(myReview ? 'レビューを更新しました！' : 'レビューを投稿しました！');
       setShowReviewForm(false);
       loadReviews();
       loadMyReview();
       loadRestaurant(); // Reload to update rating
     } catch (error) {
-      toast.error('Không thể gửi đánh giá');
+      toast.error('レビューを送信できませんでした');
       console.error('Submit review error:', error);
     } finally {
       setSubmitingReview(false);
@@ -120,17 +120,17 @@ const RestaurantDetailPage = () => {
   };
 
   const handleDeleteReview = async (reviewId) => {
-    if (!window.confirm('Bạn có chắc muốn xóa đánh giá này?')) return;
+    if (!window.confirm('このレビューを削除してもよろしいですか？')) return;
 
     try {
       await reviewAPI.delete(reviewId);
-      toast.success('Xóa đánh giá thành công!');
+      toast.success('レビューを削除しました！');
       setMyReview(null);
       setReviewFormData({ rating: 5, comment: '' });
       loadReviews();
       loadRestaurant();
     } catch (error) {
-      toast.error('Không thể xóa đánh giá');
+      toast.error('レビューを削除できませんでした');
       console.error('Delete review error:', error);
     }
   };
@@ -161,9 +161,9 @@ const RestaurantDetailPage = () => {
   if (error || !restaurant) {
     return (
       <div className="container py-5">
-        <div className="alert alert-danger">{error || 'Restaurant not found'}</div>
+        <div className="alert alert-danger">{error || 'レストランが見つかりません'}</div>
         <button className="btn btn-primary" onClick={() => navigate('/')}>
-          Go Back Home
+          ホームに戻る
         </button>
       </div>
     );
@@ -176,7 +176,7 @@ const RestaurantDetailPage = () => {
       {/* Back Button */}
       <button className="btn btn-outline-secondary mb-3" onClick={() => navigate(-1)}>
         <i className="bi bi-arrow-left me-2"></i>
-        Back
+        戻る
       </button>
 
       <div className="row">
@@ -199,7 +199,7 @@ const RestaurantDetailPage = () => {
               onClick={handleFavoriteToggle}
             >
               <i className={`bi ${isFavorite ? 'bi-heart-fill' : 'bi-heart'} me-2`}></i>
-              {isFavorite ? 'Favorited' : 'Add to Favorites'}
+              {isFavorite ? 'お気に入り済み' : 'お気に入りに追加'}
             </button>
           </div>
 
@@ -213,21 +213,21 @@ const RestaurantDetailPage = () => {
           <div className="d-flex align-items-center mb-3">
             <span className="text-warning fs-4 me-2">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
             <span className="fs-5 fw-bold me-2">{restaurant.rating}</span>
-            <span className="text-muted">({restaurant.reviews} reviews)</span>
+            <span className="text-muted">({restaurant.reviews}件のレビュー)</span>
           </div>
 
           {/* Distance & Time */}
           {restaurant.distance && (
             <div className="mb-3">
               <i className="bi bi-geo-alt text-primary me-2"></i>
-              <strong>{restaurant.distance}m away</strong> 窶｢ {restaurant.walk_time} min walk
+              <strong>{restaurant.distance}m先</strong> ・ 徒歩{restaurant.walk_time}分
             </div>
           )}
 
           {/* Description */}
           {restaurant.description && (
             <div className="mb-4">
-              <h5>About</h5>
+              <h5>概要</h5>
               <p className="text-muted">{restaurant.description}</p>
             </div>
           )}
@@ -235,26 +235,26 @@ const RestaurantDetailPage = () => {
           {/* Contact Info */}
           <div className="card">
             <div className="card-body">
-              <h5 className="card-title">Contact Information</h5>
+              <h5 className="card-title">連絡先情報</h5>
               
               {restaurant.address && (
                 <div className="mb-2">
                   <i className="bi bi-geo-alt me-2"></i>
-                  <strong>Address:</strong> {restaurant.address}
+                  <strong>住所:</strong> {restaurant.address}
                 </div>
               )}
 
               {restaurant.phone && (
                 <div className="mb-2">
                   <i className="bi bi-telephone me-2"></i>
-                  <strong>Phone:</strong> {restaurant.phone}
+                  <strong>電話番号:</strong> {restaurant.phone}
                 </div>
               )}
 
               {restaurant.hours && (
                 <div className="mb-2">
                   <i className="bi bi-clock me-2"></i>
-                  <strong>Hours:</strong> {restaurant.hours}
+                  <strong>営業時間:</strong> {restaurant.hours}
                 </div>
               )}
             </div>
@@ -263,7 +263,7 @@ const RestaurantDetailPage = () => {
           {/* Tags */}
           {restaurant.tags && restaurant.tags.length > 0 && (
             <div className="mt-3">
-              <h6>Features:</h6>
+              <h6>特徴:</h6>
               <div>
                 {(restaurant.tags ? (typeof restaurant.tags === "string" ? restaurant.tags.split(",").map(t => t.trim()) : restaurant.tags) : []).map((tag, index) => (
                   <span key={index} className="badge bg-light text-dark me-2 mb-2">
@@ -279,7 +279,7 @@ const RestaurantDetailPage = () => {
       {/* Map Section */}
       {restaurant.latitude && restaurant.longitude && (
         <div className="mt-5">
-          <h3>Location</h3>
+          <h3>場所</h3>
           <div className="card">
             <div className="card-body p-0" style={{ height: '400px' }}>
               <MapContainer
@@ -310,14 +310,14 @@ const RestaurantDetailPage = () => {
       {/* Reviews Section */}
       <div className="mt-5">
         <div className="d-flex justify-content-between align-items-center mb-4">
-          <h3>Đánh giá & Nhận xét</h3>
+          <h3>レビュー・コメント</h3>
           {user && (
             <button
               className="btn btn-primary"
               onClick={() => setShowReviewForm(!showReviewForm)}
             >
               <i className="bi bi-pencil me-2"></i>
-              {myReview ? 'Chỉnh sửa đánh giá' : 'Viết đánh giá'}
+              {myReview ? 'レビューを編集' : 'レビューを書く'}
             </button>
           )}
         </div>
@@ -330,7 +330,7 @@ const RestaurantDetailPage = () => {
                 <div className="col-md-4 text-center">
                   <h1 className="display-4">{reviewStats.averageRating.toFixed(1)}</h1>
                   <div className="text-warning fs-4">★★★★★</div>
-                  <p className="text-muted">{reviewStats.totalReviews} đánh giá</p>
+                  <p className="text-muted">{reviewStats.totalReviews} 件のレビュー</p>
                 </div>
                 <div className="col-md-8">
                   {[5, 4, 3, 2, 1].map((star) => (
@@ -357,10 +357,10 @@ const RestaurantDetailPage = () => {
         {showReviewForm && user && (
           <div className="card mb-4">
             <div className="card-body">
-              <h5 className="card-title">{myReview ? 'Chỉnh sửa đánh giá' : 'Viết đánh giá của bạn'}</h5>
+              <h5 className="card-title">{myReview ? 'レビューを編集' : 'あなたのレビューを書く'}</h5>
               <form onSubmit={handleReviewSubmit}>
                 <div className="mb-3">
-                  <label className="form-label">Đánh giá của bạn</label>
+                  <label className="form-label">評価</label>
                   <div className="btn-group d-flex" role="group">
                     {[1, 2, 3, 4, 5].map((star) => (
                       <button
@@ -375,25 +375,25 @@ const RestaurantDetailPage = () => {
                   </div>
                 </div>
                 <div className="mb-3">
-                  <label className="form-label">Nhận xét</label>
+                  <label className="form-label">コメント</label>
                   <textarea
                     className="form-control"
                     rows="4"
-                    placeholder="Chia sẻ trải nghiệm của bạn về nhà hàng này..."
+                    placeholder="このレストランでの体験を共有してください..."
                     value={reviewFormData.comment}
                     onChange={(e) => setReviewFormData({ ...reviewFormData, comment: e.target.value })}
                   ></textarea>
                 </div>
                 <div className="d-flex gap-2">
                   <button type="submit" className="btn btn-primary" disabled={submitingReview}>
-                    {submitingReview ? 'Đang gửi...' : (myReview ? 'Cập nhật' : 'Gửi đánh giá')}
+                    {submitingReview ? '送信中...' : (myReview ? '更新' : 'レビューを投稿')}
                   </button>
                   <button
                     type="button"
                     className="btn btn-outline-secondary"
                     onClick={() => setShowReviewForm(false)}
                   >
-                    Hủy
+                    キャンセル
                   </button>
                   {myReview && (
                     <button
@@ -401,7 +401,7 @@ const RestaurantDetailPage = () => {
                       className="btn btn-outline-danger ms-auto"
                       onClick={() => handleDeleteReview(myReview.id)}
                     >
-                      Xóa đánh giá
+                      レビューを削除
                     </button>
                   )}
                 </div>
@@ -415,7 +415,7 @@ const RestaurantDetailPage = () => {
           {reviews.length === 0 ? (
             <div className="text-center py-5 text-muted">
               <i className="bi bi-chat-quote fs-1"></i>
-              <p className="mt-3">Chưa có đánh giá nào. Hãy là người đầu tiên đánh giá!</p>
+              <p className="mt-3">まだレビューがありません。最初のレビューを書いてください！</p>
             </div>
           ) : (
             reviews.map((review) => (

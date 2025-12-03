@@ -25,7 +25,7 @@ const HistoryPage = () => {
       }
       setHistory(response.data.history || []);
     } catch (err) {
-      setError('Failed to load history');
+      setError('履歴の読み込みに失敗しました');
       console.error(err);
     } finally {
       setLoading(false);
@@ -33,12 +33,12 @@ const HistoryPage = () => {
   };
 
   const handleClearHistory = async () => {
-    if (window.confirm('Are you sure you want to clear all history?')) {
+    if (window.confirm('すべての履歴を消去してもよろしいですか？')) {
       try {
         await historyAPI.deleteAll();
         setHistory([]);
       } catch (error) {
-        alert('Failed to clear history');
+        alert('履歴の消去に失敗しました');
       }
     }
   };
@@ -89,7 +89,7 @@ const HistoryPage = () => {
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h1>
           <i className="bi bi-clock-history me-2"></i>
-          History
+          履歴
         </h1>
         {history.length > 0 && (
           <button 
@@ -97,7 +97,7 @@ const HistoryPage = () => {
             onClick={handleClearHistory}
           >
             <i className="bi bi-trash me-2"></i>
-            Clear All
+            すべて消去
           </button>
         )}
       </div>
@@ -112,28 +112,28 @@ const HistoryPage = () => {
           className={`btn ${filter === 'all' ? 'btn-primary' : 'btn-outline-primary'}`}
           onClick={() => setFilter('all')}
         >
-          All
+          すべて
         </button>
         <button
           className={`btn ${filter === 'view' ? 'btn-primary' : 'btn-outline-primary'}`}
           onClick={() => setFilter('view')}
         >
           <i className="bi bi-eye me-1"></i>
-          Viewed
+          閲覧済み
         </button>
         <button
           className={`btn ${filter === 'search' ? 'btn-primary' : 'btn-outline-primary'}`}
           onClick={() => setFilter('search')}
         >
           <i className="bi bi-search me-1"></i>
-          Searched
+          検索済み
         </button>
         <button
           className={`btn ${filter === 'visit' ? 'btn-primary' : 'btn-outline-primary'}`}
           onClick={() => setFilter('visit')}
         >
           <i className="bi bi-geo-alt me-1"></i>
-          Visited
+          訪問済み
         </button>
       </div>
 
@@ -179,12 +179,12 @@ const HistoryPage = () => {
       ) : (
         <div className="text-center py-5">
           <i className="bi bi-clock-history display-1 text-muted"></i>
-          <h3 className="mt-3">No history yet</h3>
+          <h3 className="mt-3">履歴はまだありません</h3>
           <p className="text-muted">
-            Your activity will appear here
+            あなたの活動がここに表示されます
           </p>
           <a href="/" className="btn btn-primary mt-3">
-            Start Exploring
+            探索を開始
           </a>
         </div>
       )}

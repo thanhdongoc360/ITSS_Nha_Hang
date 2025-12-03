@@ -34,25 +34,25 @@ const Navbar = () => {
                 <li className="nav-item">
                   <Link className="nav-link" to="/">
                     <i className="bi bi-house-door me-1"></i>
-                    Home
+                    ホーム
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" to="/search">
                     <i className="bi bi-search me-1"></i>
-                    Search
+                    検索
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" to="/favorites">
                     <i className="bi bi-heart me-1"></i>
-                    Favorites
+                    お気に入り
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" to="/history">
                     <i className="bi bi-clock-history me-1"></i>
-                    History
+                    履歴
                   </Link>
                 </li>
               </ul>
@@ -73,14 +73,14 @@ const Navbar = () => {
                     <li>
                       <Link className="dropdown-item" to="/profile">
                         <i className="bi bi-person me-2"></i>
-                        Profile
+                        プロフィール
                       </Link>
                     </li>
                     <li><hr className="dropdown-divider" /></li>
                     <li>
                       <button className="dropdown-item" onClick={handleLogout}>
                         <i className="bi bi-box-arrow-right me-2"></i>
-                        Logout
+                        ログアウト
                       </button>
                     </li>
                   </ul>
@@ -90,10 +90,10 @@ const Navbar = () => {
           ) : (
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                <Link className="nav-link" to="/login">Login</Link>
+                <Link className="nav-link" to="/login">ログイン</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/register">Register</Link>
+                <Link className="nav-link" to="/register">登録</Link>
               </li>
             </ul>
           )}

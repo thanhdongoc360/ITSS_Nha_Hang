@@ -18,12 +18,12 @@ const RegisterPage = () => {
 
     // Validation
     if (password !== confirmPassword) {
-      setError('Passwords do not match');
+      setError('パスワードが一致しません');
       return;
     }
 
     if (password.length < 6) {
-      setError('Password must be at least 6 characters');
+      setError('パスワードは6文字以上必要です');
       return;
     }
 
@@ -36,7 +36,7 @@ const RegisterPage = () => {
     if (result.success) {
       navigate('/');
     } else {
-      setError(result.message || 'Registration failed');
+      setError(result.message || '登録に失敗しました');
     }
   };
 
@@ -48,7 +48,7 @@ const RegisterPage = () => {
             <div className="card-body p-5">
               <div className="text-center mb-4">
                 <h2 className="fw-bold">🍜 GohanGo</h2>
-                <p className="text-muted">Create your account</p>
+                <p className="text-muted">アカウントを作成</p>
               </div>
 
               {error && (
@@ -59,7 +59,7 @@ const RegisterPage = () => {
 
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                  <label htmlFor="name" className="form-label">Name</label>
+                  <label htmlFor="name" className="form-label">名前</label>
                   <input
                     type="text"
                     className="form-control"
@@ -68,12 +68,12 @@ const RegisterPage = () => {
                     onChange={(e) => setName(e.target.value)}
                     required
                     minLength={2}
-                    placeholder="Your name"
+                    placeholder="あなたの名前"
                   />
                 </div>
 
                 <div className="mb-3">
-                  <label htmlFor="email" className="form-label">Email</label>
+                  <label htmlFor="email" className="form-label">メールアドレス</label>
                   <input
                     type="email"
                     className="form-control"
@@ -86,7 +86,7 @@ const RegisterPage = () => {
                 </div>
 
                 <div className="mb-3">
-                  <label htmlFor="password" className="form-label">Password</label>
+                  <label htmlFor="password" className="form-label">パスワード</label>
                   <input
                     type="password"
                     className="form-control"
@@ -95,12 +95,12 @@ const RegisterPage = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                     minLength={6}
-                    placeholder="At least 6 characters"
+                    placeholder="6文字以上"
                   />
                 </div>
 
                 <div className="mb-3">
-                  <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
+                  <label htmlFor="confirmPassword" className="form-label">パスワード確認</label>
                   <input
                     type="password"
                     className="form-control"
@@ -108,7 +108,7 @@ const RegisterPage = () => {
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
-                    placeholder="Confirm your password"
+                    placeholder="パスワードを再入力"
                   />
                 </div>
 
@@ -120,17 +120,17 @@ const RegisterPage = () => {
                   {loading ? (
                     <>
                       <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-                      Creating account...
+                      アカウント作成中...
                     </>
                   ) : (
-                    'Register'
+                    '登録'
                   )}
                 </button>
               </form>
 
               <div className="text-center">
                 <p className="mb-0">
-                  Already have an account? <Link to="/login">Login</Link>
+                  すでにアカウントをお持ちですか？ <Link to="/login">ログイン</Link>
                 </p>
               </div>
             </div>

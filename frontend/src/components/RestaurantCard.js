@@ -118,7 +118,7 @@ const RestaurantCard = ({ restaurant, isFavorite: initialFavorite, onFavoriteTog
               {restaurant.walk_time && (
                 <div className="text-muted small mb-2">
                   <i className="bi bi-person-walking me-1"></i>
-                  {restaurant.walk_time} min walk
+                  徒歩{restaurant.walk_time}分
                 </div>
               )}
 
@@ -133,7 +133,7 @@ const RestaurantCard = ({ restaurant, isFavorite: initialFavorite, onFavoriteTog
               {/* View Details Button */}
               <div className="mt-auto">
                 <div className="btn btn-outline-primary btn-sm w-100 view-details-btn">
-                  View Details
+                  詳細を見る
                   <i className="bi bi-arrow-right ms-2"></i>
                 </div>
               </div>

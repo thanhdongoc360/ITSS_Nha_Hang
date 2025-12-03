@@ -63,9 +63,9 @@ const ProfilePage = () => {
       updateUser({ ...user, name: editName, email: editEmail });
       setProfile({ ...profile, name: editName, email: editEmail });
       setEditMode(false);
-      setMessage({ type: 'success', text: 'Profile updated successfully!' });
+      setMessage({ type: 'success', text: 'プロフィールを更新しました！' });
     } catch (error) {
-      setMessage({ type: 'danger', text: error.message || 'Failed to update profile' });
+      setMessage({ type: 'danger', text: error.message || 'プロフィールの更新に失敗しました' });
     } finally {
       setSaving(false);
     }
@@ -78,9 +78,9 @@ const ProfilePage = () => {
 
     try {
       await profileAPI.updatePreferences(preferences);
-      setMessage({ type: 'success', text: 'Preferences updated successfully!' });
+      setMessage({ type: 'success', text: '設定を更新しました！' });
     } catch (error) {
-      setMessage({ type: 'danger', text: 'Failed to update preferences' });
+      setMessage({ type: 'danger', text: '設定の更新に失敗しました' });
     } finally {
       setSaving(false);
     }
@@ -109,7 +109,7 @@ const ProfilePage = () => {
     <div className="container py-4">
       <h1 className="mb-4">
         <i className="bi bi-person-circle me-2"></i>
-        My Profile
+        マイプロフィール
       </h1>
 
       {message.text && (
@@ -125,14 +125,14 @@ const ProfilePage = () => {
           <div className="card shadow-sm">
             <div className="card-body">
               <div className="d-flex justify-content-between align-items-center mb-3">
-                <h5 className="card-title mb-0">Profile Information</h5>
+                <h5 className="card-title mb-0">プロフィール情報</h5>
                 {!editMode && (
                   <button 
                     className="btn btn-sm btn-outline-primary"
                     onClick={() => setEditMode(true)}
                   >
                     <i className="bi bi-pencil me-1"></i>
-                    Edit
+                    編集
                   </button>
                 )}
               </div>
@@ -140,7 +140,7 @@ const ProfilePage = () => {
               {editMode ? (
                 <form onSubmit={handleUpdateProfile}>
                   <div className="mb-3">
-                    <label className="form-label">Name</label>
+                    <label className="form-label">名前</label>
                     <input
                       type="text"
                       className="form-control"
@@ -150,7 +150,7 @@ const ProfilePage = () => {
                     />
                   </div>
                   <div className="mb-3">
-                    <label className="form-label">Email</label>
+                    <label className="form-label">メールアドレス</label>
                     <input
                       type="email"
                       className="form-control"
@@ -161,7 +161,7 @@ const ProfilePage = () => {
                   </div>
                   <div className="d-flex gap-2">
                     <button type="submit" className="btn btn-primary" disabled={saving}>
-                      {saving ? 'Saving...' : 'Save Changes'}
+                      {saving ? '保存中...' : '変更を保存'}
                     </button>
                     <button 
                       type="button" 
@@ -172,16 +172,16 @@ const ProfilePage = () => {
                         setEditEmail(profile.email);
                       }}
                     >
-                      Cancel
+                      キャンセル
                     </button>
                   </div>
                 </form>
               ) : (
                 <div>
-                  <p><strong>Name:</strong> {profile?.name}</p>
-                  <p><strong>Email:</strong> {profile?.email}</p>
+                  <p><strong>名前:</strong> {profile?.name}</p>
+                  <p><strong>メール:</strong> {profile?.email}</p>
                   <p className="text-muted mb-0">
-                    <small>Member since {new Date(profile?.created_at).toLocaleDateString()}</small>
+                    <small>登録日: {new Date(profile?.created_at).toLocaleDateString('ja-JP')}</small>
                   </p>
                 </div>
               )}
@@ -192,20 +192,20 @@ const ProfilePage = () => {
           {stats && (
             <div className="card shadow-sm mt-4">
               <div className="card-body">
-                <h5 className="card-title mb-3">Statistics</h5>
+                <h5 className="card-title mb-3">統計</h5>
                 <div className="row text-center">
                   <div className="col-6">
                     <div className="p-3">
                       <i className="bi bi-heart-fill text-danger fs-2"></i>
                       <h3 className="mt-2">{stats.favoritesCount}</h3>
-                      <p className="text-muted mb-0">Favorites</p>
+                      <p className="text-muted mb-0">お気に入り</p>
                     </div>
                   </div>
                   <div className="col-6">
                     <div className="p-3">
                       <i className="bi bi-clock-history text-primary fs-2"></i>
                       <h3 className="mt-2">{stats.historyCount}</h3>
-                      <p className="text-muted mb-0">History</p>
+                      <p className="text-muted mb-0">履歴</p>
                     </div>
                   </div>
                 </div>
@@ -220,12 +220,12 @@ const ProfilePage = () => {
             <div className="card-body">
               <h5 className="card-title mb-3">
                 <i className="bi bi-sliders me-2"></i>
-                Preferences
+                設定
               </h5>
 
               <form onSubmit={handleUpdatePreferences}>
                 <div className="mb-3">
-                  <label className="form-label">Max Distance (meters)</label>
+                  <label className="form-label">最大距離 (メートル)</label>
                   <input
                     type="number"
                     className="form-control"
@@ -236,7 +236,7 @@ const ProfilePage = () => {
                 </div>
 
                 <div className="mb-3">
-                  <label className="form-label">Max Walk Time (minutes)</label>
+                  <label className="form-label">最大徒歩時間 (分)</label>
                   <input
                     type="number"
                     className="form-control"
@@ -247,7 +247,7 @@ const ProfilePage = () => {
                 </div>
 
                 <div className="mb-3">
-                  <label className="form-label">Favorite Cuisines</label>
+                  <label className="form-label">好きな料理</label>
                   <div className="d-flex flex-wrap gap-2">
                     {availableCuisines.map((cuisine) => (
                       <button
@@ -268,11 +268,11 @@ const ProfilePage = () => {
 
                 <div className="mb-3">
                   <label className="form-label">
-                    Price Range: ¥{preferences.price_range[0]} - ¥{preferences.price_range[1]}
+                    価格帯: ¥{preferences.price_range[0]} - ¥{preferences.price_range[1]}
                   </label>
                   <div className="d-flex gap-3">
                     <div className="flex-grow-1">
-                      <label className="form-label small">Min</label>
+                      <label className="form-label small">最小</label>
                       <select
                         className="form-select"
                         value={preferences.price_range[0]}
@@ -281,13 +281,13 @@ const ProfilePage = () => {
                           price_range: [parseInt(e.target.value), preferences.price_range[1]]
                         })}
                       >
-                        <option value="1">¥ (Budget)</option>
-                        <option value="2">¥¥ (Moderate)</option>
-                        <option value="3">¥¥¥ (Expensive)</option>
+                        <option value="1">¥ (安い)</option>
+                        <option value="2">¥¥ (普通)</option>
+                        <option value="3">¥¥¥ (高い)</option>
                       </select>
                     </div>
                     <div className="flex-grow-1">
-                      <label className="form-label small">Max</label>
+                      <label className="form-label small">最大</label>
                       <select
                         className="form-select"
                         value={preferences.price_range[1]}
@@ -296,16 +296,16 @@ const ProfilePage = () => {
                           price_range: [preferences.price_range[0], parseInt(e.target.value)]
                         })}
                       >
-                        <option value="1">¥ (Budget)</option>
-                        <option value="2">¥¥ (Moderate)</option>
-                        <option value="3">¥¥¥ (Expensive)</option>
+                        <option value="1">¥ (安い)</option>
+                        <option value="2">¥¥ (普通)</option>
+                        <option value="3">¥¥¥ (高い)</option>
                       </select>
                     </div>
                   </div>
                 </div>
 
                 <button type="submit" className="btn btn-primary w-100" disabled={saving}>
-                  {saving ? 'Saving...' : 'Save Preferences'}
+                  {saving ? '保存中...' : '設定を保存'}
                 </button>
               </form>
             </div>
