@@ -21,6 +21,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
+import './responsive-mobile.css';
 
 function App() {
   return (

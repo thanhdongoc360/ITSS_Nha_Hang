@@ -2,7 +2,6 @@
 
 .filters-sidebar {
   background: white;
-  padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   position: sticky;
@@ -30,9 +29,9 @@
 }
 
 .form-label.fw-semibold {
-  font-size: 0.95rem;
   color: #495057;
   margin-bottom: 0.75rem;
+  font-weight: 600;
 }
 
 .form-check-input:checked {
@@ -56,17 +55,10 @@
   opacity: 1;
 }
 
-/* Mobile Responsive */
-@media (max-width: 991px) {
-  .filters-sidebar {
-    position: static;
-    margin-bottom: 2rem;
-  }
-}
-
 /* Active filter badges animation */
 .badge {
   animation: fadeIn 0.3s ease;
+  font-size: 0.85rem;
 }
 
 @keyframes fadeIn {
@@ -77,5 +69,56 @@
   to {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+/* ==================== RESPONSIVE ADJUSTMENTS ====================*/
+
+/* Small Mobile: 320px - 575px */
+@media (max-width: 575px) {
+  .filters-sidebar {
+    padding: 1rem;
+    position: static;
+    margin-bottom: 1.5rem;
+    top: auto;
+  }
+  
+  .form-label.fw-semibold {
+    font-size: 0.9rem;
+  }
+  
+  .badge {
+    font-size: 0.75rem;
+    padding: 0.25em 0.5em;
+  }
+}
+
+/* Mobile: 576px - 767px */
+@media (min-width: 576px) and (max-width: 767px) {
+  .filters-sidebar {
+    padding: 1.25rem;
+    position: static;
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-label.fw-semibold {
+    font-size: 0.95rem;
+  }
+}
+
+/* Tablet: 768px - 991px */
+@media (min-width: 768px) and (max-width: 991px) {
+  .filters-sidebar {
+    padding: 1.25rem;
+    position: static;
+    margin-bottom: 2rem;
+  }
+}
+
+/* Desktop: 992px+ */
+@media (min-width: 992px) {
+  .filters-sidebar {
+    padding: 1.5rem;
+    position: sticky;
   }
 }

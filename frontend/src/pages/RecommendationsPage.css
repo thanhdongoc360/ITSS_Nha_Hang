@@ -54,3 +54,72 @@
     transform: translateY(0);
   }
 }
+
+/* ==================== RESPONSIVE ADJUSTMENTS ====================*/
+
+/* Small Mobile: 320px - 575px */
+@media (max-width: 575px) {
+  .recommendations-header {
+    margin-bottom: 1.5rem;
+  }
+  
+  .recommendations-header h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .recommendation-reasons .badge {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+    margin-right: 0.4rem;
+    margin-bottom: 0.4rem;
+  }
+}
+
+/* Mobile: 576px - 767px */
+@media (min-width: 576px) and (max-width: 767px) {
+  .recommendations-header {
+    margin-bottom: 1.75rem;
+  }
+  
+  .recommendations-header h1 {
+    font-size: 1.75rem;
+  }
+  
+  .recommendation-reasons .badge {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.7rem;
+  }
+}
+
+/* Tablet: 768px - 991px */
+@media (min-width: 768px) and (max-width: 991px) {
+  .recommendations-header {
+    margin-bottom: 2rem;
+  }
+  
+  .recommendations-header h1 {
+    font-size: 2rem;
+  }
+  
+  .recommendation-reasons .badge {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+/* Desktop: 992px+ */
+@media (min-width: 992px) {
+  .recommendations-header {
+    margin-bottom: 2.5rem;
+  }
+  
+  .recommendations-header h1 {
+    font-size: 2.25rem;
+  }
+  
+  .recommendation-reasons .badge {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+  }
+}

@@ -1,6 +1,7 @@
 /* Restaurant Card Styles */
 .restaurant-card {
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
 }
 
 .restaurant-card:hover {
@@ -10,6 +11,9 @@
 .restaurant-card-inner {
   transition: box-shadow 0.3s ease;
   overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .restaurant-card:hover .restaurant-card-inner {
@@ -19,41 +23,48 @@
 /* Image Container */
 .restaurant-image-container {
   overflow: hidden;
-  height: 220px;
   background-color: #f8f9fa;
+  position: relative;
+  flex-shrink: 0;
 }
 
 .restaurant-image {
-  height: 100%;
   width: 100%;
+  height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
 }
 
 .restaurant-card:hover .restaurant-image {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 /* Favorite Button */
 .btn-favorite {
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
   padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
   transition: all 0.3s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: white;
+  border: none;
+  z-index: 10;
 }
 
 .btn-favorite:hover {
   transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .btn-favorite.btn-danger {
   animation: heartBeat 0.3s ease;
+  background-color: #dc3545;
+  color: white;
 }
 
 @keyframes heartBeat {
@@ -67,7 +78,6 @@
 
 /* Restaurant Name */
 .restaurant-name {
-  font-size: 1.1rem;
   font-weight: 600;
   color: #212529;
   line-height: 1.3;
@@ -76,14 +86,13 @@
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  min-height: 2.6rem;
 }
 
 /* Stars */
 .restaurant-stars {
-  font-size: 0.9rem;
   display: flex;
   gap: 2px;
+  align-items: center;
 }
 
 /* Description */
@@ -94,11 +103,13 @@
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  color: #6c757d;
 }
 
 /* View Details Button */
 .view-details-btn {
   transition: all 0.3s ease;
+  margin-top: auto;
 }
 
 .restaurant-card:hover .view-details-btn {
@@ -111,16 +122,60 @@
 .badge {
   font-weight: 500;
   padding: 0.35em 0.65em;
+  font-size: 0.8rem;
 }
 
-/* Responsive adjustments */
-@media (max-width: 576px) {
+/* ==================== RESPONSIVE ADJUSTMENTS ====================*/
+
+/* Small Mobile: 320px - 575px (iPhone SE, 6/7/8) */
+@media (max-width: 575px) {
+  .restaurant-image-container {
+    height: 160px;
+  }
+  
+  .restaurant-name {
+    font-size: 0.95rem;
+  }
+  
+  .restaurant-stars {
+    font-size: 0.8rem;
+  }
+  
+  .restaurant-description {
+    font-size: 0.85rem;
+  }
+  
+  .btn-favorite {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+    top: 6px;
+    right: 6px;
+  }
+  
+  .badge {
+    font-size: 0.75rem;
+    padding: 0.25em 0.5em;
+  }
+  
+  .view-details-btn {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+/* Mobile: 576px - 767px (iPhone XR, 11, 12, 13, 14 Pro Max) */
+@media (min-width: 576px) and (max-width: 767px) {
   .restaurant-image-container {
     height: 180px;
   }
   
   .restaurant-name {
     font-size: 1rem;
+  }
+  
+  .restaurant-stars {
+    font-size: 0.85rem;
   }
   
   .btn-favorite {
@@ -130,8 +185,52 @@
   }
 }
 
+/* Tablet: 768px - 991px (iPad Mini, Air) */
+@media (min-width: 768px) and (max-width: 991px) {
+  .restaurant-image-container {
+    height: 200px;
+  }
+  
+  .restaurant-name {
+    font-size: 1.05rem;
+  }
+  
+  .btn-favorite {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+/* Desktop: 992px - 1399px */
+@media (min-width: 992px) and (max-width: 1399px) {
+  .restaurant-image-container {
+    height: 220px;
+  }
+  
+  .restaurant-name {
+    font-size: 1.1rem;
+  }
+  
+  .btn-favorite {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+  }
+}
+
+/* Large Desktop & Ultra-wide: 1400px+ */
 @media (min-width: 1400px) {
   .restaurant-image-container {
     height: 240px;
+  }
+  
+  .restaurant-name {
+    font-size: 1.15rem;
+  }
+  
+  .btn-favorite {
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
   }
 }
