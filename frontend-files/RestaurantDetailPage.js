@@ -9,8 +9,10 @@ const RestaurantDetailPage = () => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [historyAdded, setHistoryAdded] = useState(false);
 
   useEffect(() => {
+    setHistoryAdded(false); // Reset flag when restaurant changes
     loadRestaurant();
   }, [id]);
 
@@ -23,8 +25,11 @@ const RestaurantDetailPage = () => {
       setRestaurant(response.data.restaurant);
       setIsFavorite(response.data.restaurant.isFavorite || false);
       
-      // Add to history
-      await historyAPI.add(id, 'view');
+      // Add to history only once per page load
+      if (!historyAdded) {
+        await historyAPI.add(id, 'view');
+        setHistoryAdded(true);
+      }
     } catch (err) {
       setError('Failed to load restaurant details');
       console.error(err);

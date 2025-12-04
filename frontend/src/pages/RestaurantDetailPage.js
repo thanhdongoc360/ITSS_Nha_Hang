@@ -36,6 +36,7 @@ const RestaurantDetailPage = () => {
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [reviewFormData, setReviewFormData] = useState({ rating: 5, comment: '' });
   const [submitingReview, setSubmitingReview] = useState(false);
+  const [historyAdded, setHistoryAdded] = useState(false);
 
   const loadRestaurant = async () => {
     setLoading(true);
@@ -46,8 +47,11 @@ const RestaurantDetailPage = () => {
       setRestaurant(response.data.restaurant);
       setIsFavorite(response.data.restaurant.isFavorite || false);
       
-      // Add to history
-      await historyAPI.add(id, 'view');
+      // Add to history only once per page load
+      if (!historyAdded) {
+        await historyAPI.add(id, 'view');
+        setHistoryAdded(true);
+      }
     } catch (err) {
       setError('レストラン情報の読み込みに失敗しました');
       console.error(err);
@@ -137,6 +141,7 @@ const RestaurantDetailPage = () => {
 
   // Load data when component mounts or id changes
   useEffect(() => {
+    setHistoryAdded(false); // Reset flag when restaurant changes
     loadRestaurant();
     loadReviews();
   }, [id]);

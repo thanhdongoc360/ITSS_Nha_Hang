@@ -41,8 +41,23 @@ CREATE PROCEDURE add_to_history(
   IN p_action VARCHAR(50)
 )
 BEGIN
-  INSERT INTO history (user_id, restaurant_id, action)
-  VALUES (p_user_id, p_restaurant_id, p_action);
+  DECLARE v_last_action_time DATETIME;
+  
+  -- Kiểm tra xem bản ghi này đã tồn tại trong 5 phút gần đây không
+  SELECT created_at INTO v_last_action_time
+  FROM history
+  WHERE user_id = p_user_id 
+    AND restaurant_id = p_restaurant_id 
+    AND action = p_action
+    AND created_at > DATE_SUB(NOW(), INTERVAL 5 MINUTE)
+  ORDER BY created_at DESC
+  LIMIT 1;
+  
+  -- Chỉ insert nếu không có bản ghi gần đây
+  IF v_last_action_time IS NULL THEN
+    INSERT INTO history (user_id, restaurant_id, action)
+    VALUES (p_user_id, p_restaurant_id, p_action);
+  END IF;
 END //
 DELIMITER ;
 
