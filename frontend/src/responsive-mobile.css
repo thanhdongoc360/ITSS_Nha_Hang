@@ -155,9 +155,9 @@ select:focus {
     padding-right: 0.25rem;
   }
   
-  .col-6 {
-    flex: 0 0 50%;
-    max-width: 50%;
+  .col-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
     padding-left: 0.25rem;
     padding-right: 0.25rem;
   }
@@ -172,6 +172,32 @@ select:focus {
   
   .g-md-4 {
     gap: 0.5rem;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .row {
+    --bs-gutter-x: 0.7rem;
+    --bs-gutter-y: 0.7rem;
+  }
+  
+  .col-sm-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding-left: 0.35rem;
+    padding-right: 0.35rem;
+  }
+  
+  .g-2 {
+    gap: 0.7rem;
+  }
+  
+  .g-sm-3 {
+    gap: 0.7rem;
+  }
+  
+  .g-md-4 {
+    gap: 0.7rem;
   }
 }
 

@@ -152,7 +152,9 @@
 /* Small Mobile: 320px - 575px (iPhone SE, 6/7/8) */
 @media (max-width: 575px) {
   .col-12 {
-    padding: 0.5rem;
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 0.25rem;
   }
   
   .restaurant-image-container {
@@ -202,7 +204,7 @@
   .col-sm-6 {
     flex: 0 0 50%;
     max-width: 50%;
-    padding: 0.5rem;
+    padding: 0.35rem;
   }
   
   .restaurant-image-container {
@@ -235,10 +237,10 @@
 
 /* Tablet: 768px - 991px (iPad Mini, Air) */
 @media (min-width: 768px) and (max-width: 991px) {
-  .col-md-6 {
-    flex: 0 0 50%;
-    max-width: 50%;
-    padding: 0.75rem;
+  .col-md-4 {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+    padding: 0.5rem;
   }
   
   .restaurant-image-container {
@@ -257,9 +259,9 @@
 
 /* Desktop: 992px - 1399px */
 @media (min-width: 992px) and (max-width: 1399px) {
-  .col-lg-4 {
-    flex: 0 0 33.333%;
-    max-width: 33.333%;
+  .col-lg-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
     padding: 0.75rem;
   }
   
@@ -280,9 +282,9 @@
 
 /* Large Desktop & Ultra-wide: 1400px+ */
 @media (min-width: 1400px) {
-  .col-xl-3 {
-    flex: 0 0 25%;
-    max-width: 25%;
+  .col-xl-2 {
+    flex: 0 0 16.666%;
+    max-width: 16.666%;
     padding: 0.75rem;
   }
   
