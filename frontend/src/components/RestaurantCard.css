@@ -2,6 +2,8 @@
 .restaurant-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .restaurant-card:hover {
@@ -14,6 +16,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  border-radius: 0.5rem;
 }
 
 .restaurant-card:hover .restaurant-card-inner {
@@ -26,6 +29,7 @@
   background-color: #f8f9fa;
   position: relative;
   flex-shrink: 0;
+  aspect-ratio: 16 / 10;
 }
 
 .restaurant-image {
@@ -33,6 +37,7 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease;
+  display: block;
 }
 
 .restaurant-card:hover .restaurant-image {
@@ -54,11 +59,17 @@
   background-color: white;
   border: none;
   z-index: 10;
+  cursor: pointer;
 }
 
-.btn-favorite:hover {
+.btn-favorite:hover:not(:disabled) {
   transform: scale(1.1);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-favorite:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 
 .btn-favorite.btn-danger {
@@ -86,6 +97,7 @@
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  min-height: auto;
 }
 
 /* Stars */
@@ -93,6 +105,10 @@
   display: flex;
   gap: 2px;
   align-items: center;
+}
+
+.restaurant-stars i {
+  font-size: 0.875rem;
 }
 
 /* Description */
@@ -104,12 +120,17 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   color: #6c757d;
+  flex-grow: 1;
 }
 
 /* View Details Button */
 .view-details-btn {
   transition: all 0.3s ease;
   margin-top: auto;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .restaurant-card:hover .view-details-btn {
@@ -123,26 +144,33 @@
   font-weight: 500;
   padding: 0.35em 0.65em;
   font-size: 0.8rem;
+  display: inline-block;
 }
 
 /* ==================== RESPONSIVE ADJUSTMENTS ====================*/
 
 /* Small Mobile: 320px - 575px (iPhone SE, 6/7/8) */
 @media (max-width: 575px) {
+  .col-12 {
+    padding: 0.5rem;
+  }
+  
   .restaurant-image-container {
-    height: 160px;
+    aspect-ratio: 16 / 10;
   }
   
   .restaurant-name {
     font-size: 0.95rem;
+    margin-bottom: 0.5rem;
   }
   
   .restaurant-stars {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
   }
   
   .restaurant-description {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
   }
   
   .btn-favorite {
@@ -154,27 +182,43 @@
   }
   
   .badge {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     padding: 0.25em 0.5em;
+    margin-right: 0.25rem;
   }
   
   .view-details-btn {
     font-size: 0.9rem;
     padding: 0.4rem 0.8rem;
   }
+  
+  .card-body {
+    padding: 0.75rem;
+  }
 }
 
-/* Mobile: 576px - 767px (iPhone XR, 11, 12, 13, 14 Pro Max) */
+/* Mobile: 576px - 767px (iPhone XR, 11, 12, 13, 14, 14 Pro Max) */
 @media (min-width: 576px) and (max-width: 767px) {
+  .col-sm-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding: 0.5rem;
+  }
+  
   .restaurant-image-container {
-    height: 180px;
+    aspect-ratio: 16 / 10;
   }
   
   .restaurant-name {
     font-size: 1rem;
+    margin-bottom: 0.5rem;
   }
   
   .restaurant-stars {
+    font-size: 0.8rem;
+  }
+  
+  .restaurant-description {
     font-size: 0.85rem;
   }
   
@@ -183,12 +227,22 @@
     height: 36px;
     font-size: 1rem;
   }
+  
+  .card-body {
+    padding: 0.75rem;
+  }
 }
 
 /* Tablet: 768px - 991px (iPad Mini, Air) */
 @media (min-width: 768px) and (max-width: 991px) {
+  .col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding: 0.75rem;
+  }
+  
   .restaurant-image-container {
-    height: 200px;
+    aspect-ratio: 16 / 10;
   }
   
   .restaurant-name {
@@ -203,8 +257,14 @@
 
 /* Desktop: 992px - 1399px */
 @media (min-width: 992px) and (max-width: 1399px) {
+  .col-lg-4 {
+    flex: 0 0 33.333%;
+    max-width: 33.333%;
+    padding: 0.75rem;
+  }
+  
   .restaurant-image-container {
-    height: 220px;
+    aspect-ratio: 16 / 10;
   }
   
   .restaurant-name {
@@ -220,8 +280,14 @@
 
 /* Large Desktop & Ultra-wide: 1400px+ */
 @media (min-width: 1400px) {
+  .col-xl-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+    padding: 0.75rem;
+  }
+  
   .restaurant-image-container {
-    height: 240px;
+    aspect-ratio: 16 / 10;
   }
   
   .restaurant-name {

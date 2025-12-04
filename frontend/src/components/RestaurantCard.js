@@ -55,9 +55,8 @@ const RestaurantCard = ({ restaurant, isFavorite: initialFavorite, onFavoriteTog
   };
 
   return (
-    <div className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-4">
-      <div className="restaurant-card h-100">
-        <Link to={`/restaurant/${restaurant.id}`} className="text-decoration-none">
+    <div className="restaurant-card h-100">
+      <Link to={`/restaurant/${restaurant.id}`} className="text-decoration-none">
           <div className="card h-100 border-0 shadow-sm restaurant-card-inner">
             {/* Image Container */}
             <div className="position-relative restaurant-image-container">
@@ -141,7 +140,6 @@ const RestaurantCard = ({ restaurant, isFavorite: initialFavorite, onFavoriteTog
           </div>
         </Link>
       </div>
-    </div>
   );
 };
 

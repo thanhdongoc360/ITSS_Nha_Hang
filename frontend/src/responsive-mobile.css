@@ -144,25 +144,34 @@ select:focus {
 /* ==================== GRID RESPONSIVE ====================*/
 @media (max-width: 575px) {
   .row {
-    margin-left: -0.5rem;
-    margin-right: -0.5rem;
+    margin-left: -0.25rem;
+    margin-right: -0.25rem;
+    --bs-gutter-x: 0.5rem;
+    --bs-gutter-y: 0.5rem;
   }
   
   .col {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+  
+  .col-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
   }
   
   .g-2 {
     gap: 0.5rem;
   }
   
-  .g-3 {
-    gap: 1rem;
+  .g-sm-3 {
+    gap: 0.5rem;
   }
   
-  .g-4 {
-    gap: 1.25rem;
+  .g-md-4 {
+    gap: 0.5rem;
   }
 }
 
