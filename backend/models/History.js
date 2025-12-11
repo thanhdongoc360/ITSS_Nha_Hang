@@ -26,11 +26,18 @@ class History {
    * Thêm vào history
    */
   static async add(userId, restaurantId, action = 'view') {
-    await db.query(
-      'CALL add_to_history(?, ?, ?)',
-      [userId, restaurantId, action]
-    );
-    return true;
+    try {
+      // Insert directly instead of using stored procedure
+      await db.query(
+        'INSERT INTO history (user_id, restaurant_id, action) VALUES (?, ?, ?)',
+        [userId, restaurantId, action]
+      );
+      return true;
+    } catch (error) {
+      // Ignore duplicate errors or any other errors to not break the main flow
+      console.warn('History add warning:', error.message);
+      return false;
+    }
   }
 
   /**
