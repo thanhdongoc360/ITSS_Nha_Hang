@@ -96,11 +96,19 @@ const RestaurantDetailPage = () => {
   };
 
   const handleFavoriteToggle = async () => {
+    if (!user) {
+      toast.error('お気に入りに追加するにはログインしてください');
+      navigate('/login');
+      return;
+    }
+
     try {
       const response = await favoriteAPI.toggle(id);
       setIsFavorite(response.data.isFavorite);
+      toast.success(response.data.isFavorite ? 'お気に入りに追加しました！' : 'お気に入りから削除しました！');
     } catch (error) {
       console.error('Toggle favorite error:', error);
+      toast.error('お気に入りの更新に失敗しました');
     }
   };
 

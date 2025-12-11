@@ -33,8 +33,8 @@ class Favorite {
    */
   static async add(userId, restaurantId) {
     try {
-      await db.query(
-        'CALL add_to_favorites(?, ?)',
+      const result = await db.query(
+        'INSERT INTO favorites (user_id, restaurant_id) VALUES (?, ?)',
         [userId, restaurantId]
       );
       return true;
@@ -52,7 +52,7 @@ class Favorite {
    */
   static async remove(userId, restaurantId) {
     await db.query(
-      'CALL remove_from_favorites(?, ?)',
+      'DELETE FROM favorites WHERE user_id = ? AND restaurant_id = ?',
       [userId, restaurantId]
     );
     return true;
