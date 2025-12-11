@@ -44,7 +44,14 @@ const RestaurantDetailPage = () => {
 
     try {
       const response = await restaurantAPI.getById(id);
+      console.log('Restaurant response:', response);
+      
       // Response interceptor returns data object directly
+      if (!response || !response.restaurant) {
+        setError('レストラン情報が取得できません');
+        return;
+      }
+      
       setRestaurant(response.restaurant);
       setIsFavorite(response.restaurant.isFavorite || false);
       
@@ -60,7 +67,7 @@ const RestaurantDetailPage = () => {
       }
     } catch (err) {
       setError('レストラン情報の読み込みに失敗しました');
-      console.error(err);
+      console.error('Error loading restaurant:', err);
     } finally {
       setLoading(false);
     }
