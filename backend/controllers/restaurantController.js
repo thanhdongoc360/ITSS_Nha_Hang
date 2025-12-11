@@ -57,15 +57,22 @@ class RestaurantController {
 
       // Check if favorited
       if (req.user) {
-        restaurant.isFavorite = await Favorite.isFavorite(req.user.id, id);
-        
-        // Add to history
-        await History.add(req.user.id, id, 'view');
+        try {
+          restaurant.isFavorite = await Favorite.isFavorite(req.user.id, id);
+          
+          // Add to history
+          await History.add(req.user.id, id, 'view');
+        } catch (userError) {
+          // Log but don't fail the main request
+          console.error('Error checking favorite/history:', userError);
+          restaurant.isFavorite = false;
+        }
       }
 
       return successResponse(res, 200, 'Restaurant retrieved successfully', { restaurant });
     } catch (error) {
       console.error('Get restaurant error:', error);
+      console.error('Error stack:', error.stack);
       return errorResponse(res, 500, 'Failed to retrieve restaurant');
     }
   }
