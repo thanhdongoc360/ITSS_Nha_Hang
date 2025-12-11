@@ -37,20 +37,20 @@ const ProfilePage = () => {
     setLoading(true);
     try {
       const response = await profileAPI.get();
-      setProfile(response.data.user);
-      setEditName(response.data.user.name);
-      setEditEmail(response.data.user.email);
+      setProfile(response.user);
+      setEditName(response.user.name);
+      setEditEmail(response.user.email);
       
-      if (response.data.preferences) {
+      if (response.preferences) {
         setPreferences({
-          max_distance: response.data.preferences.max_distance || '',
-          max_walk_time: response.data.preferences.max_walk_time || '',
-          cuisine_types: JSON.parse(response.data.preferences.cuisine_types || '[]'),
-          price_range: JSON.parse(response.data.preferences.price_range || '[1, 3]')
+          max_distance: response.preferences.max_distance || '',
+          max_walk_time: response.preferences.max_walk_time || '',
+          cuisine_types: JSON.parse(response.preferences.cuisine_types || '[]'),
+          price_range: JSON.parse(response.preferences.price_range || '[1, 3]')
         });
       }
       
-      setStats(response.data.stats);
+      setStats(response.stats);
     } catch (error) {
       console.error('Failed to load profile:', error);
     } finally {

@@ -17,7 +17,8 @@ const FavoritesPage = () => {
 
     try {
       const response = await favoriteAPI.getAll();
-      setFavorites(response.data.favorites || []);
+      // Response interceptor already returns data object
+      setFavorites(response.favorites || []);
     } catch (err) {
       setError('お気に入りの読み込みに失敗しました');
       console.error(err);

@@ -14,9 +14,9 @@ const RestaurantCard = ({ restaurant, isFavorite: initialFavorite, onFavoriteTog
     setLoading(true);
     try {
       const response = await favoriteAPI.toggle(restaurant.id);
-      setIsFavorite(response.data.isFavorite);
+      setIsFavorite(response.isFavorite);
       if (onFavoriteToggle) {
-        onFavoriteToggle(restaurant.id, response.data.isFavorite);
+        onFavoriteToggle(restaurant.id, response.isFavorite);
       }
     } catch (error) {
       console.error('Toggle favorite error:', error);
