@@ -37,6 +37,10 @@ const RestaurantDetailPage = () => {
   const [reviewFormData, setReviewFormData] = useState({ rating: 5, comment: '' });
   const [submitingReview, setSubmitingReview] = useState(false);
   const [historyAdded, setHistoryAdded] = useState(false);
+  
+  // Directions state
+  const [userLocation, setUserLocation] = useState(null);
+  const [locationError, setLocationError] = useState('');
 
   const loadRestaurant = async () => {
     setLoading(true);
@@ -198,6 +202,49 @@ const RestaurantDetailPage = () => {
 
   const getPriceBadge = (price) => 'ﾂ･'.repeat(price);
 
+  // Get user's current location
+  const getCurrentLocation = () => {
+    setLocationError('');
+    if (!navigator.geolocation) {
+      setLocationError('お使いのブラウザは位置情報機能に対応していません');
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setUserLocation({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        });
+      },
+      (error) => {
+        setLocationError('位置情報の取得に失敗しました。ブラウザの設定を確認してください。');
+        console.error('Geolocation error:', error);
+      }
+    );
+  };
+
+  // Open Google Maps directions
+  const openDirections = () => {
+    if (!restaurant.latitude || !restaurant.longitude) {
+      toast.error('レストランの位置情報が利用できません');
+      return;
+    }
+
+    if (!userLocation) {
+      getCurrentLocation();
+      setTimeout(() => {
+        if (userLocation) {
+          const url = `https://www.google.com/maps/dir/?api=1&origin=${userLocation.lat},${userLocation.lng}&destination=${restaurant.latitude},${restaurant.longitude}&travelmode=walking`;
+          window.open(url, '_blank');
+        }
+      }, 1000);
+    } else {
+      const url = `https://www.google.com/maps/dir/?api=1&origin=${userLocation.lat},${userLocation.lng}&destination=${restaurant.latitude},${restaurant.longitude}&travelmode=walking`;
+      window.open(url, '_blank');
+    }
+  };
+
   return (
     <div className="container py-4">
       {/* Back Button */}
@@ -306,7 +353,16 @@ const RestaurantDetailPage = () => {
       {/* Map Section */}
       {restaurant.latitude && restaurant.longitude && (
         <div className="mt-5">
-          <h3>場所</h3>
+          <div className="d-flex justify-content-between align-items-center mb-3">
+            <h3>場所</h3>
+            <button
+              className="btn btn-outline-primary btn-sm"
+              onClick={openDirections}
+            >
+              <i className="bi bi-geo-alt-fill me-2"></i>
+              経路を見る
+            </button>
+          </div>
           <div className="card">
             <div className="card-body p-0" style={{ height: '400px' }}>
               <MapContainer
@@ -331,6 +387,12 @@ const RestaurantDetailPage = () => {
             <i className="bi bi-geo-alt me-1"></i>
             {restaurant.address}
           </div>
+          {locationError && (
+            <div className="alert alert-warning mt-2 mb-0">
+              <i className="bi bi-exclamation-circle me-2"></i>
+              {locationError}
+            </div>
+          )}
         </div>
       )}
 
