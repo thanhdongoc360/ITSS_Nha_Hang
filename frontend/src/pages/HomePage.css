@@ -1,0 +1,191 @@
+/* ==================== LOGO HEADER ====================*/
+.home-logo-header {
+  background: #fff;
+  padding: 1rem 0;
+  text-align: center;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.home-logo {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0d6efd;
+  letter-spacing: 2px;
+}
+
+/* ==================== SEARCH BAR ====================*/
+.search-bar-home {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  padding: 1rem;
+  z-index: 100;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar-home .input-group {
+  max-width: 100%;
+}
+
+.search-bar-home .form-control {
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.search-bar-home .form-control::placeholder {
+  color: #adb5bd;
+}
+
+.search-bar-home .form-control:focus {
+  box-shadow: none;
+  border-color: #0d6efd;
+}
+
+/* ==================== RECOMMEND GRID ====================*/
+.recommend-grid {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.recommend-large {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+}
+
+.recommend-large .card {
+  height: 100%;
+}
+
+.recommend-small-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.recommend-small {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  max-width: 100%;
+}
+
+.recommend-small .card {
+  height: 100%;
+  width: 100%;
+}
+
+/* ==================== HOME PAGE ====================*/
+.home-page {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  padding-bottom: 2rem;
+}
+
+.home-page .container {
+  max-width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Remove all overrides - let Bootstrap handle the grid */
+
+.home-page section h2 {
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+}
+
+/* ==================== RESPONSIVE DESIGN ====================*/
+
+/* Small Mobile: 320px - 575px */
+@media (max-width: 575px) {
+  .home-logo-header {
+    padding: 0.75rem 0;
+  }
+  
+  .home-logo {
+    font-size: 1.3rem;
+    letter-spacing: 1.5px;
+  }
+  
+  .search-bar-home {
+    padding: 0.75rem;
+  }
+  
+  .home-page .container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  
+  .home-page section {
+    margin-bottom: 1.5rem;
+  }
+  
+  .home-page section h2 {
+    font-size: 0.9rem;
+  }
+}
+
+/* Mobile: 576px - 767px */
+@media (min-width: 576px) and (max-width: 767px) {
+  .recommend-small-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .recommend-grid {
+    gap: 1rem;
+  }
+}
+
+/* Tablet: 768px - 991px */
+@media (min-width: 768px) and (max-width: 991px) {
+  .search-bar-home {
+    padding: 1.5rem;
+  }
+  
+  .recommend-small-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  
+  .recommend-large {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* Desktop: 992px+ */
+@media (min-width: 992px) {
+  .search-bar-home {
+    position: relative;
+    padding: 2rem 0;
+    box-shadow: none;
+    background: transparent;
+  }
+  
+  .recommend-grid {
+    display: flex;
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+  
+  .recommend-large {
+    flex: 1;
+    min-width: 300px;
+    aspect-ratio: auto;
+  }
+  
+  .recommend-small-grid {
+    flex: 1;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .recommend-small {
+    aspect-ratio: auto;
+  }
+  
+  .home-page section h2 {
+    font-size: 1.1rem;
+  }
+}

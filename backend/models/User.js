@@ -56,6 +56,24 @@ class User {
   }
 
   /**
+   * Compare password (alias for verifyPassword)
+   */
+  static async comparePassword(plainPassword, hashedPassword) {
+    return await bcrypt.compare(plainPassword, hashedPassword);
+  }
+
+  /**
+   * Update password
+   */
+  static async updatePassword(id, newPassword) {
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    await db.query(
+      'UPDATE users SET password = ? WHERE id = ?',
+      [hashedPassword, id]
+    );
+  }
+
+  /**
    * Xóa user
    */
   static async delete(id) {

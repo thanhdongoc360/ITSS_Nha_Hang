@@ -8,6 +8,7 @@
   top: 80px;
   max-height: calc(100vh - 100px);
   overflow-y: auto;
+  padding: 1.5rem;
 }
 
 .filters-sidebar::-webkit-scrollbar {
@@ -32,6 +33,7 @@
   color: #495057;
   margin-bottom: 0.75rem;
   font-weight: 600;
+  font-size: 0.95rem;
 }
 
 .form-check-input:checked {
@@ -81,15 +83,30 @@
     position: static;
     margin-bottom: 1.5rem;
     top: auto;
+    max-height: none;
+  }
+  
+  .filters-sidebar.show {
+    display: block;
   }
   
   .form-label.fw-semibold {
     font-size: 0.9rem;
   }
   
+  .form-check {
+    margin-bottom: 0.5rem !important;
+  }
+  
   .badge {
     font-size: 0.75rem;
     padding: 0.25em 0.5em;
+  }
+  
+  .form-control,
+  .form-select {
+    font-size: 16px;
+    padding: 0.5rem 0.75rem;
   }
 }
 
@@ -120,5 +137,6 @@
   .filters-sidebar {
     padding: 1.5rem;
     position: sticky;
+    display: block !important;
   }
 }

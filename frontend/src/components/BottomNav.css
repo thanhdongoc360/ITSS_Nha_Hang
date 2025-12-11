@@ -1,0 +1,89 @@
+/* ==================== BOTTOM NAVIGATION ====================*/
+.bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background-color: #fff;
+  border-top: 1px solid #e9ecef;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+}
+
+.bottom-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  text-decoration: none;
+  color: #6c757d;
+  font-size: 0.7rem;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.bottom-nav-item i {
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.bottom-nav-item span {
+  font-weight: 500;
+}
+
+.bottom-nav-item:hover {
+  color: #0d6efd;
+  background-color: #f8f9fa;
+}
+
+.bottom-nav-item.active {
+  color: #0d6efd;
+}
+
+.bottom-nav-item.active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: #0d6efd;
+}
+
+/* ==================== RESPONSIVE ADJUSTMENTS ====================*/
+
+/* Small Mobile: 320px - 575px */
+@media (max-width: 575px) {
+  .bottom-nav {
+    display: flex;
+  }
+  
+  .bottom-nav-item {
+    font-size: 0.65rem;
+  }
+  
+  .bottom-nav-item i {
+    font-size: 1.1rem;
+  }
+}
+
+/* Mobile: 576px - 767px */
+@media (min-width: 576px) and (max-width: 767px) {
+  .bottom-nav {
+    display: flex;
+  }
+}
+
+/* Tablet and up: 768px+ */
+@media (min-width: 768px) {
+  .bottom-nav {
+    display: none !important;
+  }
+}

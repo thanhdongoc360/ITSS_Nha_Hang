@@ -78,4 +78,18 @@ router.put('/', [
     .normalizeEmail()
 ], ProfileController.updateProfile);
 
+/**
+ * @route   POST /api/profile/change-password
+ * @desc    Đổi mật khẩu
+ * @access  Private
+ */
+router.post('/change-password', [
+  body('currentPassword')
+    .notEmpty()
+    .withMessage('Current password is required'),
+  body('newPassword')
+    .isLength({ min: 6 })
+    .withMessage('New password must be at least 6 characters')
+], ProfileController.changePassword);
+
 module.exports = router;

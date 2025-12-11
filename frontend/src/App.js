@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import Navbar from './components/Navbar';
+import BottomNav from './components/BottomNav';
 import PrivateRoute from './components/PrivateRoute';
 import { ToastContainer } from 'react-toastify';
 
@@ -89,6 +90,9 @@ function App() {
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </main>
+
+          {/* Bottom Navigation - Mobile Only */}
+          <BottomNav />
 
           {/* Footer */}
           <footer className="bg-light py-3 mt-5">

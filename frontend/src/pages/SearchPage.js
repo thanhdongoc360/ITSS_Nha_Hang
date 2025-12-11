@@ -17,7 +17,7 @@ const SearchPage = () => {
   const [restaurants, setRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [showFilters, setShowFilters] = useState(true);
+  const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
     loadData();
@@ -151,8 +151,21 @@ const SearchPage = () => {
     <div className="container-fluid py-4">
       <div className="row">
         {/* Filters Sidebar */}
-        <div className={`col-lg-3 mb-4 ${showFilters ? '' : 'd-none d-lg-block'}`}>
-          <div className="filters-sidebar">
+        <div className="col-12 col-lg-3 mb-4">
+          {/* Mobile Toggle Button */}
+          <div className="d-lg-none mb-3">
+            <button
+              className="btn btn-primary w-100"
+              onClick={() => setShowFilters(!showFilters)}
+            >
+              <i className={`bi bi-funnel me-2`}></i>
+              フィルター {getActiveFiltersCount() > 0 && `(${getActiveFiltersCount()})`}
+              <i className={`bi bi-chevron-${showFilters ? 'up' : 'down'} ms-auto`}></i>
+            </button>
+          </div>
+
+          {/* Filter Sidebar */}
+          <div className={`filters-sidebar ${showFilters ? 'show' : 'd-none d-lg-block'}`}>
             <div className="d-flex justify-content-between align-items-center mb-3">
               <h5 className="mb-0">
                 <i className="bi bi-funnel me-2"></i>
@@ -362,13 +375,14 @@ const SearchPage = () => {
               <p className="mt-3 text-muted">レストランを読み込み中...</p>
             </div>
           ) : filteredRestaurants.length > 0 ? (
-            <div className="row">
+            <div className="row g-2 g-sm-3 g-md-4">
               {filteredRestaurants.map((restaurant) => (
-                <RestaurantCard
-                  key={restaurant.id}
-                  restaurant={restaurant}
-                  isFavorite={restaurant.isFavorite}
-                />
+                <div key={restaurant.id} className="col-12 col-sm-6 col-md-4 col-lg-6 col-xl-4">
+                  <RestaurantCard
+                    restaurant={restaurant}
+                    isFavorite={restaurant.isFavorite}
+                  />
+                </div>
               ))}
             </div>
           ) : (

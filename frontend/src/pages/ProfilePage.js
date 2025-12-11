@@ -20,6 +20,15 @@ const ProfilePage = () => {
   const [editName, setEditName] = useState('');
   const [editEmail, setEditEmail] = useState('');
 
+  // Password change state
+  const [showPasswordForm, setShowPasswordForm] = useState(false);
+  const [passwordData, setPasswordData] = useState({
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: ''
+  });
+  const [passwordError, setPasswordError] = useState('');
+
   useEffect(() => {
     loadProfile();
   }, []);
@@ -91,6 +100,42 @@ const ProfilePage = () => {
       ? preferences.cuisine_types.filter(c => c !== cuisine)
       : [...preferences.cuisine_types, cuisine];
     setPreferences({ ...preferences, cuisine_types: newCuisines });
+  };
+
+  const handlePasswordChange = async (e) => {
+    e.preventDefault();
+    setPasswordError('');
+    
+    // Validation
+    if (passwordData.newPassword.length < 6) {
+      setPasswordError('新しいパスワードは6文字以上である必要があります');
+      return;
+    }
+    
+    if (passwordData.newPassword !== passwordData.confirmPassword) {
+      setPasswordError('新しいパスワードが一致しません');
+      return;
+    }
+
+    setSaving(true);
+    try {
+      await profileAPI.changePassword({
+        currentPassword: passwordData.currentPassword,
+        newPassword: passwordData.newPassword
+      });
+      
+      setMessage({ type: 'success', text: 'パスワードを変更しました！' });
+      setShowPasswordForm(false);
+      setPasswordData({
+        currentPassword: '',
+        newPassword: '',
+        confirmPassword: ''
+      });
+    } catch (error) {
+      setPasswordError(error.response?.data?.message || 'パスワードの変更に失敗しました');
+    } finally {
+      setSaving(false);
+    }
   };
 
   const availableCuisines = ['和食', '中華', 'イタリアン', 'ラーメン', 'ベトナム料理', '韓国料理'];
@@ -180,9 +225,93 @@ const ProfilePage = () => {
                 <div>
                   <p><strong>名前:</strong> {profile?.name}</p>
                   <p><strong>メール:</strong> {profile?.email}</p>
-                  <p className="text-muted mb-0">
+                  <p className="text-muted mb-3">
                     <small>登録日: {new Date(profile?.created_at).toLocaleDateString('ja-JP')}</small>
                   </p>
+                  
+                  <hr />
+                  
+                  {/* Password Change Section */}
+                  <div className="mt-3">
+                    {!showPasswordForm ? (
+                      <button 
+                        className="btn btn-outline-secondary btn-sm"
+                        onClick={() => setShowPasswordForm(true)}
+                      >
+                        <i className="bi bi-key me-1"></i>
+                        パスワードを変更
+                      </button>
+                    ) : (
+                      <form onSubmit={handlePasswordChange}>
+                        <h6 className="mb-3">パスワードを変更</h6>
+                        
+                        {passwordError && (
+                          <div className="alert alert-danger alert-sm py-2">
+                            <small>{passwordError}</small>
+                          </div>
+                        )}
+                        
+                        <div className="mb-3">
+                          <label className="form-label">現在のパスワード</label>
+                          <input
+                            type="password"
+                            className="form-control"
+                            value={passwordData.currentPassword}
+                            onChange={(e) => setPasswordData({...passwordData, currentPassword: e.target.value})}
+                            required
+                            autoComplete="current-password"
+                          />
+                        </div>
+                        
+                        <div className="mb-3">
+                          <label className="form-label">新しいパスワード</label>
+                          <input
+                            type="password"
+                            className="form-control"
+                            value={passwordData.newPassword}
+                            onChange={(e) => setPasswordData({...passwordData, newPassword: e.target.value})}
+                            required
+                            minLength="6"
+                            autoComplete="new-password"
+                          />
+                          <small className="text-muted">6文字以上</small>
+                        </div>
+                        
+                        <div className="mb-3">
+                          <label className="form-label">新しいパスワード（確認）</label>
+                          <input
+                            type="password"
+                            className="form-control"
+                            value={passwordData.confirmPassword}
+                            onChange={(e) => setPasswordData({...passwordData, confirmPassword: e.target.value})}
+                            required
+                            autoComplete="new-password"
+                          />
+                        </div>
+                        
+                        <div className="d-flex gap-2">
+                          <button type="submit" className="btn btn-primary btn-sm" disabled={saving}>
+                            {saving ? '変更中...' : '変更'}
+                          </button>
+                          <button 
+                            type="button" 
+                            className="btn btn-secondary btn-sm"
+                            onClick={() => {
+                              setShowPasswordForm(false);
+                              setPasswordData({
+                                currentPassword: '',
+                                newPassword: '',
+                                confirmPassword: ''
+                              });
+                              setPasswordError('');
+                            }}
+                          >
+                            キャンセル
+                          </button>
+                        </div>
+                      </form>
+                    )}
+                  </div>
                 </div>
               )}
             </div>

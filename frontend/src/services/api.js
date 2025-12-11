@@ -186,6 +186,10 @@ export const profileAPI = {
 
   getStats: async () => {
     return await api.get('/profile/stats');
+  },
+
+  changePassword: async (data) => {
+    return await api.post('/profile/change-password', data);
   }
 };
 
@@ -193,8 +197,8 @@ export const profileAPI = {
 
 // ==================== RECOMMENDATION API ====================
 export const recommendationAPI = {
-  get: async () => {
-    return await api.get('/recommendations');
+  get: async (params = {}) => {
+    return await api.get('/recommendations', { params });
   },
 
   getPreferences: async () => {

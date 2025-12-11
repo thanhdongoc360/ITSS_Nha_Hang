@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { restaurantAPI } from '../services/api';
 import RestaurantCard from '../components/RestaurantCard';
+import './HomePage.css';
 
 const HomePage = () => {
+  const navigate = useNavigate();
   const [restaurants, setRestaurants] = useState([]);
   const [popular, setPopular] = useState([]);
   const [nearby, setNearby] = useState([]);
@@ -56,76 +59,95 @@ const HomePage = () => {
   }
 
   return (
-    <div className="container py-4">
-      {/* Hero Section */}
-      <div className="text-center mb-5">
-        <h1 className="display-4 fw-bold mb-3">次の食事を見つけよう 🍜</h1>
-        <p className="lead text-muted">周辺の最高のレストランを発見しよう</p>
+    <div className="home-page">
+      {/* Logo Header */}
+      <div className="home-logo-header">
+        <h1 className="home-logo">GOHANGO</h1>
       </div>
 
-      {/* Popular Restaurants */}
-      {popular.length > 0 && (
-        <section className="mb-5">
-          <div className="d-flex justify-content-between align-items-center mb-3">
-            <h2 className="h4 mb-0">
-              <i className="bi bi-fire text-danger me-2"></i>
-              人気のレストラン
-            </h2>
-          </div>
-          <div className="row g-2 g-sm-3 g-md-4">
-            {popular.map((restaurant) => (
-              <div key={restaurant.id} className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                <RestaurantCard 
-                  restaurant={restaurant}
-                  isFavorite={restaurant.isFavorite}
-                />
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Nearby Restaurants */}
-      {nearby.length > 0 && (
-        <section className="mb-5">
-          <div className="d-flex justify-content-between align-items-center mb-3">
-            <h2 className="h4 mb-0">
-              <i className="bi bi-geo-alt text-primary me-2"></i>
-              近くのレストラン
-            </h2>
-          </div>
-          <div className="row g-2 g-sm-3 g-md-4">
-            {nearby.map((restaurant) => (
-              <div key={restaurant.id} className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                <RestaurantCard 
-                  restaurant={restaurant}
-                  isFavorite={restaurant.isFavorite}
-                />
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* All Restaurants */}
-      <section>
-        <div className="d-flex justify-content-between align-items-center mb-3">
-          <h2 className="h4 mb-0">
-            <i className="bi bi-grid text-success me-2"></i>
-            すべてのレストラン
-          </h2>
+      {/* Search Bar */}
+      <div className="search-bar-home">
+        <div className="input-group">
+          <span className="input-group-text bg-white border-end-0">
+            <i className="bi bi-search"></i>
+          </span>
+          <input 
+            type="text" 
+            className="form-control border-start-0" 
+            placeholder="レストランを検索"
+            onClick={() => navigate('/search')}
+            readOnly
+          />
         </div>
-        <div className="row g-2 g-sm-3 g-md-4">
-          {restaurants.map((restaurant) => (
-            <div key={restaurant.id} className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-              <RestaurantCard 
-                restaurant={restaurant}
-                isFavorite={restaurant.isFavorite}
-              />
+      </div>
+
+      {/* Main Content */}
+      <div className="container py-4">
+        {/* Recommend Section */}
+        {popular.length > 0 && (
+          <section className="mb-5">
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <h2 className="h5 mb-0 fw-bold">
+                <i className="bi bi-star-fill text-warning me-2"></i>
+                おすすめ
+              </h2>
             </div>
-          ))}
-        </div>
-      </section>
+            
+            <div className="row g-2 g-sm-3 g-md-4">
+              {popular.map((restaurant) => (
+                <div key={restaurant.id} className="col-6 col-lg-4 col-xl-3">
+                  <RestaurantCard 
+                    restaurant={restaurant}
+                    isFavorite={restaurant.isFavorite}
+                  />
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Nearby Restaurants */}
+        {nearby.length > 0 && (
+          <section className="mb-5">
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <h2 className="h5 mb-0 fw-bold">
+                <i className="bi bi-geo-alt text-primary me-2"></i>
+                周辺
+              </h2>
+            </div>
+            <div className="row g-2 g-sm-3 g-md-4">
+              {nearby.map((restaurant) => (
+                <div key={restaurant.id} className="col-6 col-lg-4 col-xl-3">
+                  <RestaurantCard 
+                    restaurant={restaurant}
+                    isFavorite={restaurant.isFavorite}
+                  />
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* All Restaurants */}
+        <section>
+          <div className="d-flex justify-content-between align-items-center mb-3">
+            <h2 className="h5 mb-0 fw-bold">
+              <i className="bi bi-grid text-success me-2"></i>
+              すべて
+            </h2>
+          </div>
+          <div className="row g-2 g-sm-3 g-md-4">
+            {restaurants.map((restaurant) => (
+              <div key={restaurant.id} className="col-6 col-lg-4 col-xl-3">
+                <RestaurantCard 
+                  restaurant={restaurant}
+                  isFavorite={restaurant.isFavorite}
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
     </div>
   );
 };

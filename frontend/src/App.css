@@ -103,3 +103,16 @@
     padding-right: 24px;
   }
 }
+
+/* ==================== NAVBAR RESPONSIVE ====================*/
+@media (max-width: 767px) {
+  .navbar {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .navbar {
+    display: block !important;
+  }
+}

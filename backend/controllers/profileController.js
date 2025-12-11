@@ -164,6 +164,45 @@ class ProfileController {
       return errorResponse(res, 500, 'Failed to retrieve stats');
     }
   }
+
+  /**
+   * Đổi mật khẩu
+   * POST /api/profile/change-password
+   */
+  static async changePassword(req, res) {
+    try {
+      const { currentPassword, newPassword } = req.body;
+
+      // Validate input
+      if (!currentPassword || !newPassword) {
+        return errorResponse(res, 400, 'Current password and new password are required');
+      }
+
+      if (newPassword.length < 6) {
+        return errorResponse(res, 400, 'New password must be at least 6 characters');
+      }
+
+      // Get user
+      const user = await User.findById(req.user.id);
+      if (!user) {
+        return errorResponse(res, 404, 'User not found');
+      }
+
+      // Verify current password
+      const isValidPassword = await User.comparePassword(currentPassword, user.password);
+      if (!isValidPassword) {
+        return errorResponse(res, 401, 'Current password is incorrect');
+      }
+
+      // Update password
+      await User.updatePassword(req.user.id, newPassword);
+
+      return successResponse(res, 200, 'Password changed successfully');
+    } catch (error) {
+      console.error('Change password error:', error);
+      return errorResponse(res, 500, 'Failed to change password');
+    }
+  }
 }
 
 module.exports = ProfileController;

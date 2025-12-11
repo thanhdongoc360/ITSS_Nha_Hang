@@ -1,22 +1,62 @@
 import React, { useState, useEffect } from 'react';
 import { recommendationAPI } from '../services/api';
 import RestaurantCard from '../components/RestaurantCard';
-import { showError } from '../utils/toast';
+import { showError, showInfo } from '../utils/toast';
 import './RecommendationsPage.css';
 
 const RecommendationsPage = () => {
   const [recommendations, setRecommendations] = useState([]);
   const [basedOn, setBasedOn] = useState({});
   const [loading, setLoading] = useState(true);
+  const [userLocation, setUserLocation] = useState(null);
+  const [gpsStatus, setGpsStatus] = useState('checking'); // checking, enabled, disabled
 
   useEffect(() => {
-    loadRecommendations();
+    getUserLocation();
   }, []);
 
-  const loadRecommendations = async () => {
+  const getUserLocation = () => {
+    if ('geolocation' in navigator) {
+      setGpsStatus('checking');
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const location = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          };
+          setUserLocation(location);
+          setGpsStatus('enabled');
+          loadRecommendations(location);
+          showInfo('📍 Using your location for better recommendations');
+        },
+        (error) => {
+          console.warn('GPS error:', error);
+          setGpsStatus('disabled');
+          loadRecommendations(null);
+          showInfo('💡 Enable GPS for personalized distance-based recommendations');
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 300000 // 5 minutes
+        }
+      );
+    } else {
+      setGpsStatus('disabled');
+      loadRecommendations(null);
+    }
+  };
+
+  const loadRecommendations = async (location = userLocation) => {
     setLoading(true);
     try {
-      const response = await recommendationAPI.get();
+      const params = {};
+      if (location) {
+        params.latitude = location.latitude;
+        params.longitude = location.longitude;
+      }
+      
+      const response = await recommendationAPI.get(params);
       setRecommendations(response.data.recommendations || []);
       setBasedOn(response.data.basedOn || {});
     } catch (error) {
@@ -44,14 +84,51 @@ const RecommendationsPage = () => {
     <div className="container py-4">
       {/* Header */}
       <div className="recommendations-header mb-4">
-        <h1 className="display-6 mb-2">
-          <i className="bi bi-stars me-2"></i>
-          Recommended For You
-        </h1>
-        <p className="text-muted mb-0">
-          {getBasedOnMessage()}
-        </p>
+        <div className="d-flex justify-content-between align-items-start">
+          <div>
+            <h1 className="display-6 mb-2">
+              <i className="bi bi-stars me-2"></i>
+              AI Recommendations
+            </h1>
+            <p className="text-muted mb-0">
+              {getBasedOnMessage()}
+            </p>
+          </div>
+          <button 
+            onClick={getUserLocation}
+            className="btn btn-outline-primary btn-sm"
+            disabled={loading}
+          >
+            <i className={`bi ${gpsStatus === 'enabled' ? 'bi-arrow-clockwise' : 'bi-geo-alt'} me-1`}></i>
+            {gpsStatus === 'enabled' ? 'Refresh' : 'Enable GPS'}
+          </button>
+        </div>
       </div>
+
+      {/* GPS Status Card */}
+      {gpsStatus === 'enabled' && userLocation && (
+        <div className="alert alert-success mb-4">
+          <div className="d-flex align-items-center">
+            <i className="bi bi-geo-alt-fill me-2"></i>
+            <small>
+              <strong>GPS Enabled</strong> - Showing restaurants based on your location
+            </small>
+          </div>
+        </div>
+      )}
+
+      {gpsStatus === 'disabled' && (
+        <div className="alert alert-warning mb-4">
+          <div className="d-flex align-items-start">
+            <i className="bi bi-exclamation-triangle me-2"></i>
+            <div>
+              <small>
+                <strong>GPS Disabled</strong> - Enable location access for distance-based recommendations
+              </small>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Info Card */}
       {(!basedOn.hasFavorites && !basedOn.hasHistory && !basedOn.hasPreferences) && (
@@ -59,9 +136,9 @@ const RecommendationsPage = () => {
           <div className="d-flex align-items-start">
             <i className="bi bi-info-circle me-3 fs-4"></i>
             <div>
-              <h6 className="mb-2">Get Better Recommendations!</h6>
+              <h6 className="mb-2">Get Better AI Recommendations!</h6>
               <p className="mb-0 small">
-                Add favorites, visit restaurants, and set your preferences to get personalized recommendations.
+                Add favorites, visit restaurants, and set your preferences for smarter AI suggestions.
               </p>
             </div>
           </div>

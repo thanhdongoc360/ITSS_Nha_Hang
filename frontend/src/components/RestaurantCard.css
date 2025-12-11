@@ -2,8 +2,10 @@
 .restaurant-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
 .restaurant-card:hover {
@@ -151,62 +153,50 @@
 
 /* Small Mobile: 320px - 575px (iPhone SE, 6/7/8) */
 @media (max-width: 575px) {
-  .col-12 {
-    flex: 0 0 100%;
-    max-width: 100%;
-    padding: 0.25rem;
-  }
-  
   .restaurant-image-container {
     aspect-ratio: 16 / 10;
   }
   
   .restaurant-name {
-    font-size: 0.95rem;
-    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+    margin-bottom: 0.35rem;
   }
   
   .restaurant-stars {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
   }
   
   .restaurant-description {
-    font-size: 0.8rem;
-    margin-bottom: 0.5rem;
+    font-size: 0.75rem;
+    margin-bottom: 0.4rem;
   }
   
   .btn-favorite {
-    width: 32px;
-    height: 32px;
-    font-size: 0.9rem;
-    top: 6px;
-    right: 6px;
+    width: 28px;
+    height: 28px;
+    font-size: 0.85rem;
+    top: 5px;
+    right: 5px;
   }
   
   .badge {
-    font-size: 0.7rem;
-    padding: 0.25em 0.5em;
-    margin-right: 0.25rem;
+    font-size: 0.65rem;
+    padding: 0.2em 0.4em;
+    margin-right: 0.2rem;
   }
   
   .view-details-btn {
-    font-size: 0.9rem;
-    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    padding: 0.35rem 0.7rem;
   }
   
   .card-body {
-    padding: 0.75rem;
+    padding: 0.6rem;
   }
 }
 
 /* Mobile: 576px - 767px (iPhone XR, 11, 12, 13, 14, 14 Pro Max) */
 @media (min-width: 576px) and (max-width: 767px) {
-  .col-sm-6 {
-    flex: 0 0 50%;
-    max-width: 50%;
-    padding: 0.35rem;
-  }
-  
   .restaurant-image-container {
     aspect-ratio: 16 / 10;
   }
