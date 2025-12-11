@@ -46,14 +46,15 @@ const RestaurantDetailPage = () => {
       const response = await restaurantAPI.getById(id);
       console.log('Restaurant response:', response);
       
-      // Response interceptor returns data object directly
-      if (!response || !response.restaurant) {
+      // API returns { success, message, data: { restaurant } }
+      const restaurant = response.data?.restaurant;
+      if (!restaurant) {
         setError('レストラン情報が取得できません');
         return;
       }
       
-      setRestaurant(response.restaurant);
-      setIsFavorite(response.restaurant.isFavorite || false);
+      setRestaurant(restaurant);
+      setIsFavorite(restaurant.isFavorite || false);
       
       // Add to history only once per page load and only when logged in
       if (!historyAdded && user) {
