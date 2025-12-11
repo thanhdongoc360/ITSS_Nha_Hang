@@ -44,6 +44,7 @@ const RestaurantDetailPage = () => {
 
     try {
       const response = await restaurantAPI.getById(id);
+      // Response interceptor returns data object directly
       setRestaurant(response.restaurant);
       setIsFavorite(response.restaurant.isFavorite || false);
       
@@ -68,8 +69,8 @@ const RestaurantDetailPage = () => {
   const loadReviews = async () => {
     try {
       const response = await reviewAPI.getRestaurantReviews(id);
-      setReviews(response.reviews || []);
-      setReviewStats(response.stats || null);
+      setReviews(response.data.reviews || []);
+      setReviewStats(response.data.stats || null);
     } catch (error) {
       console.error('Load reviews error:', error);
       // Không set error, để trang vẫn hiển thị restaurant info
@@ -82,11 +83,11 @@ const RestaurantDetailPage = () => {
     if (!user) return;
     try {
       const response = await reviewAPI.getMyReview(id);
-      if (response.review) {
-        setMyReview(response.review);
+      if (response.data.review) {
+        setMyReview(response.data.review);
         setReviewFormData({
-          rating: response.review.rating,
-          comment: response.review.comment || ''
+          rating: response.data.review.rating,
+          comment: response.data.review.comment || ''
         });
       }
     } catch (error) {
@@ -104,8 +105,8 @@ const RestaurantDetailPage = () => {
 
     try {
       const response = await favoriteAPI.toggle(id);
-      setIsFavorite(response.isFavorite);
-      toast.success(response.isFavorite ? 'お気に入りに追加しました！' : 'お気に入りから削除しました！');
+      setIsFavorite(response.data.isFavorite);
+      toast.success(response.data.isFavorite ? 'お気に入りに追加しました！' : 'お気に入りから削除しました！');
     } catch (error) {
       console.error('Toggle favorite error:', error);
       toast.error('お気に入りの更新に失敗しました');

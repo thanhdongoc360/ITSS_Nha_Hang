@@ -57,8 +57,8 @@ const RecommendationsPage = () => {
       }
       
       const response = await recommendationAPI.get(params);
-      setRecommendations(response.restaurants || []);
-      setBasedOn(response.basedOn || {});
+      setRecommendations(response.data.recommendations || []);
+      setBasedOn(response.data.basedOn || {});
     } catch (error) {
       showError('Failed to load recommendations');
       console.error('Load recommendations error:', error);

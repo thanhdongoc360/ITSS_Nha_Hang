@@ -23,7 +23,7 @@ const HistoryPage = () => {
       } else {
         response = await historyAPI.getByAction(filter);
       }
-      setHistory(response.history || []);
+      setHistory(response.data.history || []);
     } catch (err) {
       setError('履歴の読み込みに失敗しました');
       console.error(err);

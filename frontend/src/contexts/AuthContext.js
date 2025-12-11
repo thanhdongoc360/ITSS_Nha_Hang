@@ -27,8 +27,8 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       const response = await authAPI.login(email, password);
-      setUser(response.user);
-      return { success: true, data: response };
+      setUser(response.data.user);
+      return { success: true, data: response.data };
     } catch (error) {
       return { success: false, message: error.message || 'Login failed' };
     }
@@ -37,8 +37,8 @@ export const AuthProvider = ({ children }) => {
   const register = async (name, email, password) => {
     try {
       const response = await authAPI.register(name, email, password);
-      setUser(response.user);
-      return { success: true, data: response };
+      setUser(response.data.user);
+      return { success: true, data: response.data };
     } catch (error) {
       return { success: false, message: error.message || 'Registration failed' };
     }
