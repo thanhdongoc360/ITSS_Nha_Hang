@@ -47,10 +47,15 @@ const RestaurantDetailPage = () => {
       setRestaurant(response.data.restaurant);
       setIsFavorite(response.data.restaurant.isFavorite || false);
       
-      // Add to history only once per page load
-      if (!historyAdded) {
-        await historyAPI.add(id, 'view');
-        setHistoryAdded(true);
+      // Add to history only once per page load and only when logged in
+      if (!historyAdded && user) {
+        try {
+          await historyAPI.add(id, 'view');
+          setHistoryAdded(true);
+        } catch (historyError) {
+          // Ignore history errors to keep detail page usable for guests
+          console.warn('History add skipped:', historyError);
+        }
       }
     } catch (err) {
       setError('レストラン情報の読み込みに失敗しました');
