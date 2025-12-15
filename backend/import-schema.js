@@ -1,5 +1,6 @@
 const mysql = require('mysql2/promise');
 const fs = require('fs');
+require('dotenv').config();
 
 async function importSchema() {
   let connection;
@@ -9,10 +10,11 @@ async function importSchema() {
     
     // Kết nối database
     connection = await mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: '',
-      database: 'gohan_go'
+      host: process.env.DB_HOST || 'localhost',
+      port: process.env.DB_PORT || 3306,
+      user: process.env.DB_USER || 'root',
+      password: process.env.DB_PASSWORD || '',
+      database: process.env.DB_NAME || 'gohan_go'
     });
 
     console.log('✅ Kết nối thành công!');
