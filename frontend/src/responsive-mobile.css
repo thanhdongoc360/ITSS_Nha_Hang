@@ -151,8 +151,14 @@ select:focus {
   }
   
   .col,
-  .col-6,
   .col-12 {
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+  
+  .col-6 {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
     padding-left: 0.25rem;
     padding-right: 0.25rem;
   }
@@ -176,9 +182,10 @@ select:focus {
     --bs-gutter-y: 0.7rem;
   }
   
+  .col-6,
   .col-sm-6 {
-    flex: 0 0 50%;
-    max-width: 50%;
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
     padding-left: 0.35rem;
     padding-right: 0.35rem;
   }
