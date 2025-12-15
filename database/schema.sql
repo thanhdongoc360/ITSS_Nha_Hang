@@ -208,6 +208,57 @@ INSERT INTO restaurants (name, cuisine, rating, reviews, distance, walk_time, pr
   '["fusion", "craft", "group"]',
   21.0345,
   105.8530
+),
+(
+  'Sushi Kei Hoan Kiem',
+  'Japanese',
+  4.7,
+  540,
+  700,
+  10,
+  3,
+  'https://images.unsplash.com/photo-1546069901-eacef0df6022?w=800',
+  'Sushi kieu Edomae, ca song tuoi moi hang ngay. Co quay bar 10 ghe va phong rieng nho.',
+  '12 Ly Thai To, Hoan Kiem, Ha Noi',
+  '+84-24-3939-8888',
+  '11:30-14:00, 17:30-22:00',
+  '["sushi", "reservation", "bar"]',
+  21.0275,
+  105.8539
+),
+(
+  'Ramen Tatsu West Lake',
+  'Ramen',
+  4.5,
+  610,
+  1600,
+  22,
+  1,
+  'https://images.unsplash.com/photo-1553621042-f6e147245754?w=800',
+  'Ramen tonkotsu nau 12 gio, co option spicy miso. Phuc vu khuya, phu hop di doi nho.',
+  '101 Trich Sai, Tay Ho, Ha Noi',
+  '+84-24-3718-2828',
+  '11:00-23:30',
+  '["ramen", "latenight", "takeout"]',
+  21.0508,
+  105.8163
+),
+(
+  'Izakaya Hanami Cau Giay',
+  'Izakaya',
+  4.6,
+  430,
+  1800,
+  24,
+  2,
+  'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800',
+  'Quan izakaya phong cach Tokyo, nhieu do nho va sake. Co phong hut thuoc rieng va ban ngoai troi.',
+  '25 Tran Thai Tong, Cau Giay, Ha Noi',
+  '+84-24-3795-6868',
+  '17:00-23:59',
+  '["izakaya", "sake", "outdoor"]',
+  21.0309,
+  105.7817
 );
 
 -- Thêm một số nhà hàng ở Hà Nội
