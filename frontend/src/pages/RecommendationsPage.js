@@ -154,27 +154,29 @@ const RecommendationsPage = () => {
           <p className="text-muted">Finding perfect restaurants for you...</p>
         </div>
       ) : recommendations.length > 0 ? (
-        <div className="row">
+        <div className="row row-cols-2 row-cols-md-2 row-cols-lg-3 g-3">
           {recommendations.map((restaurant) => (
-            <div key={restaurant.id} className="recommendation-item mb-4">
-              <RestaurantCard
-                restaurant={restaurant}
-                isFavorite={restaurant.isFavorite}
-              />
-              
-              {/* Recommendation Reasons */}
-              {restaurant.recommendationReasons && restaurant.recommendationReasons.length > 0 && (
-                <div className="recommendation-reasons mt-2 px-3">
-                  <div className="d-flex flex-wrap gap-2">
-                    {restaurant.recommendationReasons.map((reason, idx) => (
-                      <span key={idx} className="badge bg-light text-dark border">
-                        <i className="bi bi-check-circle text-success me-1"></i>
-                        {reason}
-                      </span>
-                    ))}
+            <div key={restaurant.id} className="col">
+              <div className="recommendation-item mb-2">
+                <RestaurantCard
+                  restaurant={restaurant}
+                  isFavorite={restaurant.isFavorite}
+                />
+                
+                {/* Recommendation Reasons */}
+                {restaurant.recommendationReasons && restaurant.recommendationReasons.length > 0 && (
+                  <div className="recommendation-reasons mt-2 px-2">
+                    <div className="d-flex flex-wrap gap-1">
+                      {restaurant.recommendationReasons.map((reason, idx) => (
+                        <span key={idx} className="badge bg-light text-dark border">
+                          <i className="bi bi-check-circle text-success me-1"></i>
+                          {reason}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           ))}
         </div>

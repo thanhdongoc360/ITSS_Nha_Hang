@@ -377,7 +377,7 @@ const SearchPage = () => {
           ) : filteredRestaurants.length > 0 ? (
             <div className="row g-2 g-sm-3 g-md-4">
               {filteredRestaurants.map((restaurant) => (
-                <div key={restaurant.id} className="col-12 col-sm-6 col-md-4 col-lg-6 col-xl-4">
+                <div key={restaurant.id} className="col-6 col-md-4 col-lg-6 col-xl-4">
                   <RestaurantCard
                     restaurant={restaurant}
                     isFavorite={restaurant.isFavorite}
