@@ -195,6 +195,77 @@ INSERT INTO restaurants (name, cuisine, rating, reviews, distance, walk_time, pr
   139.6970
 );
 
+-- Thêm một số nhà hàng ở Hà Nội
+INSERT INTO restaurants (name, cuisine, rating, reviews, distance, walk_time, price, image, description, address, phone, hours, tags, latitude, longitude) VALUES
+(
+  'Pho Thin Lo Duc',
+  'Vietnamese',
+  4.7,
+  820,
+  500,
+  7,
+  1,
+  'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800',
+  'Pho bo truyen thong voi nuoc dung dam da, noi tieng tai Ha Noi. Khong gian don gian nhung luon dong khach.',
+  '13 Lo Duc, Hai Ba Trung, Ha Noi',
+  '+84-24-3821-2709',
+  '06:00-22:00',
+  '["pho", "noReservation", "local"]',
+  21.0178,
+  105.8542
+),
+(
+  'Bun Cha Huong Lien',
+  'Vietnamese',
+  4.6,
+  1200,
+  850,
+  11,
+  1,
+  'https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800',
+  'Quan bun cha noi tieng voi nuoc mam dam da va nem cua be. Từng duoc tong thong My Barack Obama tham an.',
+  '24 Le Van Huu, Hai Ba Trung, Ha Noi',
+  '+84-24-3943-4106',
+  '09:00-21:00',
+  '["buncha", "family", "casual"]',
+  21.0142,
+  105.8536
+),
+(
+  "Pizza 4P's Trang Tien",
+  'Italian',
+  4.8,
+  2100,
+  900,
+  12,
+  2,
+  'https://images.unsplash.com/photo-1548365328-9da9d86d0090?w=800',
+  'Pizza thu cong luong men tu nhien va phomai tu san xuat. Khong gian hien dai, phu hop hen ho va gia dinh.',
+  '43 Trang Tien, Hoan Kiem, Ha Noi',
+  '+84-24-3622-0666',
+  '10:00-22:00',
+  '["pizza", "cheese", "reservation"]',
+  21.0255,
+  105.8535
+),
+(
+  'Lau Nam Gia Khanh',
+  'Hotpot',
+  4.5,
+  650,
+  1500,
+  18,
+  2,
+  'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800',
+  'Lau nam thanh ngot voi nhieu loai nam tuoi. Phu hop di nhom, co phong rieng.',
+  '152 Pho Hue, Hai Ba Trung, Ha Noi',
+  '+84-24-3976-3966',
+  '10:00-22:30',
+  '["hotpot", "mushroom", "group"]',
+  21.0107,
+  105.8510
+);
+
 -- ==================== CREATE VIEWS ====================
 
 -- View để lấy danh sách nhà hàng phổ biến
