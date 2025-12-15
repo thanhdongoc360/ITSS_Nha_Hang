@@ -264,6 +264,57 @@ INSERT INTO restaurants (name, cuisine, rating, reviews, distance, walk_time, pr
   '["hotpot", "mushroom", "group"]',
   21.0107,
   105.8510
+),
+(
+  'Egg Coffee Giang',
+  'Cafe',
+  4.6,
+  980,
+  800,
+  11,
+  1,
+  'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800',
+  'Ca phe trung ban dia noi tieng Ha Noi. Quay order tang 1, cho ngoi tang 2 va 3, khong gian co dien.',
+  '39 Nguyen Huu Huan, Hoan Kiem, Ha Noi',
+  '+84-24-8268-449',
+  '07:00-22:30',
+  '["coffee", "local", "takeaway"]',
+  21.0340,
+  105.8524
+),
+(
+  'Cha Ca La Vong',
+  'Vietnamese',
+  4.3,
+  740,
+  1200,
+  15,
+  2,
+  'https://images.unsplash.com/photo-1527169402691-feff5539e52c?w=800',
+  'Mon cha ca nghieng giau vi dau phong va thi la. Thuc don don gian chi mot mon chinh, phuc vu nhanh.',
+  '14 Cha Ca, Hoan Kiem, Ha Noi',
+  '+84-24-3825-3929',
+  '10:00-22:00',
+  '["fish", "traditional", "beer"]',
+  21.0371,
+  105.8476
+),
+(
+  'Highway4 Hang Tre',
+  'Vietnamese Fusion',
+  4.5,
+  860,
+  950,
+  13,
+  2,
+  'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800',
+  'Menu dia phuong bien tau, nhieu mon do an nhe va ruou nep Son Tinh. Khong gian am cung, phu hop gap go.',
+  '25 Hang Tre, Hoan Kiem, Ha Noi',
+  '+84-24-3926-4200',
+  '11:00-22:30',
+  '["fusion", "craft", "group"]',
+  21.0345,
+  105.8530
 );
 
 -- ==================== CREATE VIEWS ====================
