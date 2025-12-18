@@ -93,9 +93,9 @@ const HomePage = () => {
               </h2>
             </div>
             
-            <div className="row g-2 g-sm-3 g-md-4">
+            <div className="row row-cols-2 row-cols-md-3 g-2 g-sm-3 g-md-4">
               {popular.map((restaurant) => (
-                <div key={restaurant.id} className="col-6 col-lg-4 col-xl-3">
+                <div key={restaurant.id} className="col">
                   <RestaurantCard 
                     restaurant={restaurant}
                     isFavorite={restaurant.isFavorite}
@@ -115,9 +115,9 @@ const HomePage = () => {
                 周辺
               </h2>
             </div>
-            <div className="row g-2 g-sm-3 g-md-4">
+            <div className="row row-cols-2 row-cols-md-3 g-2 g-sm-3 g-md-4">
               {nearby.map((restaurant) => (
-                <div key={restaurant.id} className="col-6 col-lg-4 col-xl-3">
+                <div key={restaurant.id} className="col">
                   <RestaurantCard 
                     restaurant={restaurant}
                     isFavorite={restaurant.isFavorite}
@@ -136,9 +136,9 @@ const HomePage = () => {
               すべて
             </h2>
           </div>
-          <div className="row g-2 g-sm-3 g-md-4">
+          <div className="row row-cols-2 row-cols-md-3 g-2 g-sm-3 g-md-4">
             {restaurants.map((restaurant) => (
-              <div key={restaurant.id} className="col-6 col-lg-4 col-xl-3">
+              <div key={restaurant.id} className="col">
                 <RestaurantCard 
                   restaurant={restaurant}
                   isFavorite={restaurant.isFavorite}
