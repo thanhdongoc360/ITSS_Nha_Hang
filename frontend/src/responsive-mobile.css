@@ -21,6 +21,12 @@
   .navbar {
     padding: 0.75rem 1rem;
   }
+
+  /* Force 2-cols with slight gap (49% each) */
+  .row-cols-2 > * {
+    flex: 0 0 49% !important;
+    max-width: 49% !important;
+  }
   
   .navbar-brand {
     font-size: 1.25rem;
@@ -29,13 +35,19 @@
 
 @media (min-width: 768px) {
   .navbar {
-    padding: 0.75rem 1.5rem;
+  .col-6,
+  .col-sm-6 {
+    flex: 0 0 50% !important;
+    max-width: 50% !important;
+    padding-left: 0.35rem;
+    padding-right: 0.35rem;
   }
-  
-  .navbar-brand {
-    font-size: 1.5rem;
+
+  /* Force 2-cols with slight gap (49% each) */
+  .row-cols-2 > * {
+    flex: 0 0 49% !important;
+    max-width: 49% !important;
   }
-}
 
 /* ==================== FORMS RESPONSIVE ====================*/
 @media (max-width: 575px) {
